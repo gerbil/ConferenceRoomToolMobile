@@ -37,7 +37,7 @@ angular.module('t2EventsApp')
             });
 
         $scope.openHome = function () {
-            $location.path('home'); // path not hash
+            $location.path('main'); // path not hash
             //console.info('clicked for a view -> ' + view);
         };
 

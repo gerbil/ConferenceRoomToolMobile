@@ -29,8 +29,7 @@ angular.module('t2EventsApp')
                 },
                 //Fail callback
                 function (err) {
-                    console.log("error");
-                    alert(err);
+                   console.log(err);
                 });
         });
 
