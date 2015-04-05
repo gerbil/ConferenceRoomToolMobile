@@ -24,8 +24,7 @@ angular.module('t2EventsApp')
                 .then(
                 //Success callback
                 function (event) {
-                    console.log("bound success");
-                    alert(event.tag.id);
+                    $scope.nfc = true;
                     $scope.tagId = event.tag.id;
                 },
                 //Fail callback

@@ -2,13 +2,13 @@
 
     <div class="center">
         <div class="head">
-            <div class="col-md-5 location">{{room}}</div>
+            <div class="col-md-5 location">{{roomName}}</div>
             <div class="col-md-7 resources">
                 <span class="icon-user"><i class="txt">x8</i></span>
                 <span class="icon-camera dropdown dropdown-toggle {{beamer}}" dropdown dropdown-toggle stop-event>
                       <ul class="dropdown-menu">
-                          <li ng-click="setStatus(room,'beamer','broken')"><i class='icon-alert'/></li>
-                          <li ng-click="setStatus(room,'beamer','working')"><i class='icon-thumbs-up'/></li>
+                          <li ng-click="setStatus(roomName,'beamer','broken')"><i class='icon-alert'/></li>
+                          <li ng-click="setStatus(roomName,'beamer','working')"><i class='icon-thumbs-up'/></li>
                       </ul>
                 </span>
                 <span class="icon-whiteboard dropdown dropdown-toggle {{whiteboard}}" dropdown dropdown-toggle stop-event>
@@ -35,6 +35,10 @@
             <div class="col-md-7 time">{{nextEvent.time}}</div>
             <div class="col-md-7 will">{{meetingWill}}</div>
         </div>
+    </div>
+
+    <div class="create" ng-click="createEvent()" ng-show="(status == 'free' || status == 'free noMore') && nfc" stop-event>
+        <i class="glyphicon glyphicon-plus-sign"/>
     </div>
 
 </div>
