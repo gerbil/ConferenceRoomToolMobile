@@ -1,0 +1,40 @@
+<div ng-controller="mainCtrl" class="container-fluid {{status}}" ng-click="openInfo()">
+
+    <div class="center">
+        <div class="head">
+            <div class="col-md-5 location">{{room}}</div>
+            <div class="col-md-7 resources">
+                <span class="icon-user"><i class="txt">x8</i></span>
+                <span class="icon-camera dropdown dropdown-toggle {{beamer}}" dropdown dropdown-toggle stop-event>
+                      <ul class="dropdown-menu">
+                          <li ng-click="setStatus(room,'beamer','broken')"><i class='icon-alert'/></li>
+                          <li ng-click="setStatus(room,'beamer','working')"><i class='icon-thumbs-up'/></li>
+                      </ul>
+                </span>
+                <span class="icon-whiteboard dropdown dropdown-toggle {{whiteboard}}" dropdown dropdown-toggle stop-event>
+                      <ul class="dropdown-menu">
+                          <li ng-click="setStatus('whiteboard','broken')"><i class='icon-alert'/></li>
+                          <li ng-click="setStatus('whiteboard','working')"><i class='icon-thumbs-up' /></li>
+                      </ul>
+                </span>
+                <span class="icon-light dropdown dropdown-toggle {{light}}" dropdown dropdown-toggle stop-event>
+                      <ul class="dropdown-menu">
+                          <li ng-click="setStatus('light','broken')"><i class='icon-alert'/></li>
+                          <li ng-click="setStatus('light','working')"><i class='icon-thumbs-up'/></li>
+                      </ul>
+                </span>
+            </div>
+        </div>
+
+        <div class="info">
+            <div class="col-md-5 currentTime">{{currentTime}}</div>
+
+            <div class="col-md-7 next">{{meetingText}}</div>
+            <div class="col-md-7 subj">{{nextEvent.Subject | limitTo: 26}}</div>
+            <div class="col-md-7 org">{{nextEvent.Organizer.EmailAddress.Name | limitTo: 26}}</div>
+            <div class="col-md-7 time">{{nextEvent.time}}</div>
+            <div class="col-md-7 will">{{meetingWill}}</div>
+        </div>
+    </div>
+
+</div>

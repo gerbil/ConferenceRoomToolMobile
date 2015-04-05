@@ -1,1 +1,181 @@
-/* Your application styles go here */
+@font-face{
+    font-family: 'Tele2SlabWeb-V2-Regular';
+    src: url('/styles/fonts/Tele2SlabWeb-V2-Regular.eot');
+    src: url('/styles/fonts/Tele2SlabWeb-V2-Regular.eot?#iefix') format('embedded-opentype'),
+    url('/styles/fonts/Tele2SlabWeb-V2-Regular.woff') format('woff'),
+    url('/styles/fonts/Tele2SlabWeb-V2-Regular.ttf') format('truetype'),
+    url('/styles/fonts/Tele2SlabWeb-V2-Regular.svg#webfont') format('svg');
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* MAIN SCREEN *******************************************************************/
+
+body {
+    background: #161b1f;
+    font-family: 'Tele2SlabWeb-V2-Regular', sans-serif;
+    color: #ffffff;
+    overflow-x: hidden;
+    font-size: 2em;
+}
+
+    .busy {
+        border: 15px solid rgba(128, 24, 14, 0.56);
+        height: 1536px; /* Nexus 9 real site height */
+    }
+
+    .free {
+        border: 15px solid rgba(117, 245, 133, 0.56);
+        height: 1536px; /* Nexus 9 real site height */
+    }
+
+.center {
+    padding-left: 3em;
+    margin: 0;
+    position: fixed;
+    width: 100%;
+    top: 15%;
+}
+
+.head {
+    margin-bottom: 10em;
+}
+
+    .location {
+        padding-left: 0.2em;
+        font-size: 4em;
+        margin: -0.2em 0 0 0;
+    }
+
+    /* RESOURCES *******************************************************************/
+
+    .resources {
+        font-size: 3.5em;
+        padding-left: 0.4em;
+        /*color: #929496;*/
+    }
+
+    .resources span {
+        margin-right: 0.3em;
+        padding-right: 0.1em;
+        padding-top: 0.3em;
+        border-right: 1px solid #596072;
+        vertical-align: top;
+    }
+
+    .resources span:last-child {
+        border: 0 none;
+    }
+
+    .resources span.icon-user {
+        padding-right: 0.3em;
+     }
+
+    .resources span.icon-camera {
+        margin-left: -0.2em;
+    }
+
+    .resources span i.txt {
+        font-size: 0.8em;
+        vertical-align: top;
+        display: inline-block;
+    }
+
+    .resources .broken {
+        color: red;
+        border-right: 1px solid #596072;
+    }
+
+    /* Resource broken alarm dialog */
+    ul.dropdown-menu {
+        margin: -310px 0 0 -48px;
+        height: 120px;
+        width: 250px;
+        background: #2e3336;
+        color: #f8f8f8;
+    }
+
+    ul.dropdown-menu li {
+        font-size: 6em;
+        display: inline-block;
+        border-right: 1px solid #000;
+        outline: none !important;
+        margin: 2px -3px 0 0;
+        height: 120px;
+        padding: 0 0 0 0;
+        width: 125px;
+    }
+
+    ul.dropdown-menu li:last-child {
+        border: 0 none;
+    }
+
+    ul.dropdown-menu li i {
+        height: 70px;
+        font-family: inherit;
+    }
+
+    ul.dropdown-menu li i:hover {
+        outline: none !important
+    }
+
+.create {
+    float: right;
+    margin: 41em 2em 0px 0px;
+    outline: none !important;
+}
+
+    .create i {
+        font-size: 4em;
+    }
+
+
+/* INFO SCREEN *******************************************************************/
+.info {
+
+}
+
+    .currentTime {
+        font-size: 9em;
+        border-right: 2px solid #363b41;
+        height: 2.4em;
+        padding: 0.5em 0 0 0;
+    }
+
+    .info .next, .info .desc, .info .subj, .info .org, .info .time, .info .will {
+        padding-left: 1em;
+        font-size: 2.2em;
+        color: #9c9d9e;
+    }
+
+    .info .next {
+        color: #ffffff;
+    }
+
+    .info .will {
+        margin-top: 2em;
+    }
+
+    .noMore .info .next {
+        margin-top: 3em;
+        font-size: 2.5em;
+    }

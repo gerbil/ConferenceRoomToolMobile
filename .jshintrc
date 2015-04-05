@@ -21,6 +21,10 @@
   "globals": {
     "angular": false,
     "cordova": false,
-    "StatusBar": false
+    "StatusBar": false,
+    "moment": false,
+    "$": false,
+    "alert": false,
+    "jstz": false
   }
 }

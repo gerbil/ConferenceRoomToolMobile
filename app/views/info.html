@@ -1,0 +1,24 @@
+<div ng-controller="infoCtrl" ng-click="openHome()" class="info">
+    <div class="head">
+        <div class="dateTime">12:30, Tuesday</div>
+    </div>
+
+    <div class="menu">
+        <ul>
+            <li ng-click="today()" class="today active" stop-event>Today</li>
+            <li ng-click="tomorrow()" class="tomorrow" stop-event>Tomorrow</li>
+            <li ng-click="week()" class="week" stop-event>This week</li>
+        </ul>
+    </div>
+
+    <div class="list">
+        <table class="events">
+            <tr ng-repeat="event in todayEvents.value | orderBy:'Start':false" class="event">
+                <td class="icon"><i class="glyphicon glyphicon-calendar" /></td>
+                <td class="eventSubject">{{event.Subject}}</td>
+                <td class="eventTime">{{event.Start | date:'HH:mm' : 'UTC+1'}}</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
