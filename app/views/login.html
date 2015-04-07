@@ -1,0 +1,31 @@
+<div ng-controller="loginCtrl" class="outer">
+
+    <div class="container">
+
+        <div id="login">
+
+            <p class="logo">Conference room</p>
+
+            <form name="loginForm" novalidate>
+                <fieldset class="clearfix">
+                    <p>
+                        <span class="glyphicon glyphicon-user"></span>
+                        <input type="text" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" name="username" ng-model="username">
+                    </p>
+
+                    <p>
+                        <span class="glyphicon glyphicon-lock"></span>
+                        <input type="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" name="password" ng-model="password">
+                    </p>
+
+                    <p>
+                        <input type="submit" value="Sign In" class="button" ng-click="login(username, password)" >
+                    </p>
+                </fieldset>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
