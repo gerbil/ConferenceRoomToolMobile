@@ -23,16 +23,13 @@ angular.module('t2EventsApp', [
     .config(function ($routeProvider, RestangularProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'views/login.html',
-                controller: 'loginCtrl'
+                templateUrl: 'views/login.html'
             })
             .when('/info', {
-                templateUrl: 'views/info.html',
-                controller: 'infoCtrl'
+                templateUrl: 'views/info.html'
             })
             .when('/main', {
-                templateUrl: 'views/main.html',
-                controller: 'mainCtrl'
+                templateUrl: 'views/main.html'
             })
             .otherwise({
                 redirectTo: '/'
@@ -40,5 +37,8 @@ angular.module('t2EventsApp', [
 
         // BackEnd API endpoint
         RestangularProvider.setBaseUrl('http://10.30.60.165:3000');
+
+        // Android scale workaround
+        document.body.style.zoom = 0.5;
 
     });
