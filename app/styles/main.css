@@ -1,10 +1,10 @@
 @font-face{
     font-family: 'Tele2SlabWeb-V2-Regular';
-    src: url('/styles/fonts/Tele2SlabWeb-V2-Regular.eot');
-    src: url('/styles/fonts/Tele2SlabWeb-V2-Regular.eot?#iefix') format('embedded-opentype'),
-    url('/styles/fonts/Tele2SlabWeb-V2-Regular.woff') format('woff'),
-    url('/styles/fonts/Tele2SlabWeb-V2-Regular.ttf') format('truetype'),
-    url('/styles/fonts/Tele2SlabWeb-V2-Regular.svg#webfont') format('svg');
+    src: url('fonts/Tele2SlabWeb-V2-Regular.eot');
+    src: url('fonts/Tele2SlabWeb-V2-Regular.eot?#iefix') format('embedded-opentype'),
+    url('fonts/Tele2SlabWeb-V2-Regular.woff') format('woff'),
+    url('fonts/Tele2SlabWeb-V2-Regular.ttf') format('truetype'),
+    url('fonts/Tele2SlabWeb-V2-Regular.svg#webfont') format('svg');
 }
 
 html, body, div, span, applet, object, iframe,
@@ -108,7 +108,7 @@ body {
     /* Resource broken alarm dialog */
     ul.dropdown-menu {
         margin: -310px 0 0 -48px;
-        width: 252px;
+        width: 254px;
         background: transparent;
         color: #f8f8f8;
     }
