@@ -7,14 +7,14 @@
                 <span class="icon-user"><i class="txt">x8</i></span>
                 <span class="icon-camera dropdown dropdown-toggle {{beamer}}" dropdown dropdown-toggle stop-event>
                       <ul class="dropdown-menu">
-                          <li ng-click="setStatus(roomName,'beamer','broken')"><i class='icon-alert'/></li>
-                          <li ng-click="setStatus(roomName,'beamer','working')"><i class='icon-thumbs-up'/></li>
+                          <li ng-click="setStatus(roomName,'beamer','broken')"><i class='glyphicon glyphicon-remove-circle'/></li>
+                          <li ng-click="setStatus(roomName,'beamer','working')"><i class='glyphicon glyphicon-ok-circle'/></li>
                       </ul>
                 </span>
                 <span class="icon-whiteboard dropdown dropdown-toggle {{whiteboard}}" dropdown dropdown-toggle stop-event>
                       <ul class="dropdown-menu">
                           <li ng-click="setStatus('whiteboard','broken')"><i class='icon-alert'/></li>
-                          <li ng-click="setStatus('whiteboard','working')"><i class='icon-thumbs-up' /></li>
+                          <li ng-click="setStatus('whiteboard','working')"><i class='icon-thumbs-up'/></li>
                       </ul>
                 </span>
                 <span class="icon-light dropdown dropdown-toggle {{light}}" dropdown dropdown-toggle stop-event>
@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <div class="info">
+        <div class="meetingInfo">
             <div class="col-md-5 currentTime">{{currentTime}}</div>
 
             <div class="col-md-7 next">{{meetingText}}</div>
@@ -37,8 +37,14 @@
         </div>
     </div>
 
-    <div class="create" ng-click="createEvent()" ng-show="(status == 'free' || status == 'free noMore') && nfc" stop-event>
+    <div class="create" ng-click="createEvent()" ng-show="(status == 'free' || status == 'free noMore') && tagId" stop-event>
         <i class="glyphicon glyphicon-plus-sign"/>
     </div>
+
+    <div class="logOut" ng-click="logOut()" stop-event>
+        <i class="glyphicon glyphicon-circle-arrow-left"/>
+    </div>
+
+    {{tagId}}
 
 </div>

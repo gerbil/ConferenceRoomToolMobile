@@ -9,7 +9,12 @@
  */
 angular.module('t2EventsApp')
 
-    .controller('loginCtrl', function ($scope, Restangular, $location) {
+    .controller('loginCtrl', function ($scope, Restangular, $location, $ionicPlatform, $cordovaStatusbar) {
+
+        // FullScreen
+        if(window.StatusBar) {
+            $cordovaStatusbar.hide();
+        }
 
         // Check localStorage for apikey
         var apikey = window.localStorage.getItem('apikey');
@@ -19,23 +24,23 @@ angular.module('t2EventsApp')
             // Redirect to a main screen
             $location.path('main'); // path not hash
             //console.info('Apikey found in localStorage - ' + apikey);
+        } else {
+            $scope.login = function(username, password) {
+                // Rest API communication -> send username + password, get token
+                Restangular.all('login').post({'username': username, 'password': password})
+                    .then(function (result) {
+                        // Success response from the server.
+                        $scope.apikey = result.apikey;
+                        // Set localStorage for apikey
+                        window.localStorage.setItem('apikey', $scope.apikey);
+                        // Redirect to a main screen
+                        $location.path('main'); // path not hash
+                    }, function() {
+                        // Error response from the server.
+                        $scope.loginForm.username.$setValidity('', false);
+                        $scope.loginForm.password.$setValidity('', false);
+                    });
+            };
         }
-
-        $scope.login = function(username, password) {
-            // Rest API communication -> send username + password, get token
-            Restangular.all('login').post({'username': username, 'password': password})
-                .then(function (result) {
-                    // Success response from the server.
-                    $scope.apikey = result.apikey;
-                    // Set localStorage for apikey
-                    window.localStorage.setItem('apikey', $scope.apikey);
-                    // Redirect to a main screen
-                    $location.path('main'); // path not hash
-                }, function() {
-                    // Error response from the server.
-                    $scope.loginForm.username.$setValidity('', false);
-                    $scope.loginForm.password.$setValidity('', false);
-                });
-        };
 
     });

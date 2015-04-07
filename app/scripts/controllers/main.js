@@ -10,28 +10,32 @@
 angular.module('t2EventsApp')
 
     .controller('mainCtrl', function ($scope, Restangular, $interval, $location, $cordovaNfc) {
-	
-		//Because of the problem about the async-ness of the nfc plugin, we need to wait
+
+        //Because of the problem about the async-ness of the nfc plugin, we need to wait
         //for it to be ready.
         $cordovaNfc.then(function (nfcInstance) {
-
             //Use the plugins interface as you go, in a more "angular" way
             nfcInstance.addTagDiscoveredListener(function (event) {
                 //Callback when ndef got triggered
-                alert(event.tag.id);
                 $scope.tagId = event.tag.id;
+                //alert(event.tag.id);
             })
                 .then(
                 //Success callback
                 function (event) {
-                    $scope.nfc = true;
                     $scope.tagId = event.tag.id;
+                    //alert(event.tag.id);
                 },
                 //Fail callback
                 function (err) {
-                   console.log(err);
+                    console.log(err);
                 });
         });
+
+        $scope.logOut = function() {
+            window.localStorage.removeItem('apikey');
+            $location.path('login'); // path not hash
+        }
 
         // Today events +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -41,7 +45,7 @@ angular.module('t2EventsApp')
             //tz lib or ECMA 6 Intl API for modern browsers
             //var tz = jstz.determine();
             var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-			if (!timeZone) {
+            if (!timeZone) {
                 var tz = jstz.determine(); // Determines the time zone of the browser client
                 timeZone = tz.name();
 
@@ -52,7 +56,7 @@ angular.module('t2EventsApp')
 
             // Create today date string for backend query
             // Minus 2 hours based on Outlook API
-            var today = moment().tz(timeZone).subtract(2, 'hour').format('YYYY-MM-DDTHH:mm:ss');
+            var today = moment().tz(timeZone).subtract(3, 'hour').format('YYYY-MM-DDTHH:mm:ss');
 
             // Create tomorrow date string for backend query
             var tomorrow = moment().tz(timeZone).format('YYYY-MM-DDT23:59:59');
@@ -124,10 +128,10 @@ angular.module('t2EventsApp')
 
             // Send email if broken
             if (status === 'broken') {
-                var post = {'room':  $scope.roomName, 'resource': resource};
+                var post = {'room': $scope.roomName, 'resource': resource};
                 // Rest API communication -> send email to ServiceDesk with room name and resource info
                 Restangular.all('broken').post(post)
-                    .then(function (results, error) {
+                    .then(function () {
                         //console.info(results);
                     });
             }
@@ -146,7 +150,7 @@ angular.module('t2EventsApp')
             // Rest API communication -> create calendar event using startdatetime and enddatetime
             // We need to substract 2 hours due to Outlook diff
             // Make it 30 mins length from current time
-           Restangular.all('rooms/calendar/create').post({'apikey':apikey, 'start': moment().tz(timeZone).subtract(2, 'hour').format('YYYY-MM-DDTHH:mm:ssZ'), 'end': moment().tz(timeZone).subtract(2, 'hour').add(30,'minutes').format('YYYY-MM-DDTHH:mm:ssZ')});
+            Restangular.all('rooms/calendar/create').post({'apikey': apikey, 'start': moment().tz(timeZone).subtract(2, 'hour').format('YYYY-MM-DDTHH:mm:ssZ'), 'end': moment().tz(timeZone).subtract(2, 'hour').add(30, 'minutes').format('YYYY-MM-DDTHH:mm:ssZ')});
         };
 
     })

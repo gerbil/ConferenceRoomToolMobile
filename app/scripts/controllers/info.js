@@ -20,6 +20,9 @@ angular.module('t2EventsApp')
 
         }
 
+        // We need current timestamp for display
+        $scope.currentTime = moment().tz(timeZone).format('LLLL');
+
         // Create today date string for backend query
         var today = moment().tz(timeZone).format('YYYY-MM-DDT00:00:00');
 
