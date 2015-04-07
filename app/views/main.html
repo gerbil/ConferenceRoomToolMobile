@@ -7,20 +7,20 @@
                 <span class="icon-user"><i class="txt">x8</i></span>
                 <span class="icon-camera dropdown dropdown-toggle {{beamer}}" dropdown dropdown-toggle stop-event>
                       <ul class="dropdown-menu">
-                          <li ng-click="setStatus(roomName,'beamer','broken')"><i class='glyphicon glyphicon-remove-circle'/></li>
-                          <li ng-click="setStatus(roomName,'beamer','working')"><i class='glyphicon glyphicon-ok-circle'/></li>
+                          <li ng-click="setStatus('beamer','broken')"><i class='glyphicon glyphicon-remove-circle'/></li>
+                          <li ng-click="setStatus('beamer','working')"><i class='glyphicon glyphicon-ok-circle'/></li>
                       </ul>
                 </span>
                 <span class="icon-whiteboard dropdown dropdown-toggle {{whiteboard}}" dropdown dropdown-toggle stop-event>
                       <ul class="dropdown-menu">
-                          <li ng-click="setStatus('whiteboard','broken')"><i class='icon-alert'/></li>
-                          <li ng-click="setStatus('whiteboard','working')"><i class='icon-thumbs-up'/></li>
+                          <li ng-click="setStatus('whiteboard','broken')"><i class='glyphicon glyphicon-remove-circle'/></li>
+                          <li ng-click="setStatus('whiteboard','working')"><i class='glyphicon glyphicon-ok-circle'/></li>
                       </ul>
                 </span>
                 <span class="icon-light dropdown dropdown-toggle {{light}}" dropdown dropdown-toggle stop-event>
                       <ul class="dropdown-menu">
-                          <li ng-click="setStatus('light','broken')"><i class='icon-alert'/></li>
-                          <li ng-click="setStatus('light','working')"><i class='icon-thumbs-up'/></li>
+                          <li ng-click="setStatus('light','broken')"><i class='glyphicon glyphicon-remove-circle'/></li>
+                          <li ng-click="setStatus('light','working')"><i class='glyphicon glyphicon-ok-circle'/></li>
                       </ul>
                 </span>
             </div>

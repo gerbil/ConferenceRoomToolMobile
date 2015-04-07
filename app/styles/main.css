@@ -1,10 +1,10 @@
 @font-face{
     font-family: 'Tele2SlabWeb-V2-Regular';
-    src: url('styles/fonts/Tele2SlabWeb-V2-Regular.eot');
-    src: url('styles/fonts/Tele2SlabWeb-V2-Regular.eot?#iefix') format('embedded-opentype'),
-    url('styles/fonts/Tele2SlabWeb-V2-Regular.woff') format('woff'),
-    url('styles/fonts/Tele2SlabWeb-V2-Regular.ttf') format('truetype'),
-    url('styles/fonts/Tele2SlabWeb-V2-Regular.svg#webfont') format('svg');
+    src: url('/styles/fonts/Tele2SlabWeb-V2-Regular.eot');
+    src: url('/styles/fonts/Tele2SlabWeb-V2-Regular.eot?#iefix') format('embedded-opentype'),
+    url('/styles/fonts/Tele2SlabWeb-V2-Regular.woff') format('woff'),
+    url('/styles/fonts/Tele2SlabWeb-V2-Regular.ttf') format('truetype'),
+    url('/styles/fonts/Tele2SlabWeb-V2-Regular.svg#webfont') format('svg');
 }
 
 html, body, div, span, applet, object, iframe,
@@ -108,20 +108,18 @@ body {
     /* Resource broken alarm dialog */
     ul.dropdown-menu {
         margin: -310px 0 0 -48px;
-        height: 120px;
         width: 252px;
-        background: #2e3336;
+        background: transparent;
         color: #f8f8f8;
     }
 
     ul.dropdown-menu li {
         font-size: 6em;
         display: inline-block;
-        border-right: 1px solid #000;
+        border-right: 1px dotted #fff;
         outline: none !important;
-        margin: -7px -3px 0 0;
-        height: 120px;
-        padding: 0 0 0 0;
+        margin: 10px -3px 0 0;
+        padding: 8px 0 0 18px;
         width: 125px;
     }
 
@@ -131,7 +129,7 @@ body {
 
     ul.dropdown-menu li i {
         height: 70px;
-        font-family: inherit;
+        /*font-family: inherit;*/
     }
 
     ul.dropdown-menu li i:hover {
