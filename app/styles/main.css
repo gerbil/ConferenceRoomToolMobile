@@ -139,7 +139,6 @@ body {
 .create {
     float: right;
     margin: 41em 2em 0px 0px;
-    outline: none !important;
 }
 
     .create i {
@@ -149,13 +148,15 @@ body {
 .logOut {
     color: #161b1f;
     margin: 41em 0px 0px 2em;
-    outline: none !important;
 }
 
     .logOut i {
         font-size: 4em;
     }
 
+.nfcUser {
+    margin: 0px 0px 0px 4em;
+}
 
 /* INFO SCREEN *******************************************************************/
 .meetingInfo {

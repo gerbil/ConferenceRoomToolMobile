@@ -6,19 +6,19 @@
             <div class="col-md-7 resources">
                 <span class="icon-user"><i class="txt">x8</i></span>
                 <span class="icon-camera dropdown dropdown-toggle {{beamer}}" dropdown dropdown-toggle stop-event>
-                      <ul class="dropdown-menu">
+                      <ul class="dropdown-menu" ng-show="tagId">
                           <li ng-click="setStatus('beamer','broken')"><i class='glyphicon glyphicon-remove-circle'/></li>
                           <li ng-click="setStatus('beamer','working')"><i class='glyphicon glyphicon-ok-circle'/></li>
                       </ul>
                 </span>
                 <span class="icon-whiteboard dropdown dropdown-toggle {{whiteboard}}" dropdown dropdown-toggle stop-event>
-                      <ul class="dropdown-menu">
+                      <ul class="dropdown-menu" ng-show="tagId">
                           <li ng-click="setStatus('whiteboard','broken')"><i class='glyphicon glyphicon-remove-circle'/></li>
                           <li ng-click="setStatus('whiteboard','working')"><i class='glyphicon glyphicon-ok-circle'/></li>
                       </ul>
                 </span>
                 <span class="icon-light dropdown dropdown-toggle {{light}}" dropdown dropdown-toggle stop-event>
-                      <ul class="dropdown-menu">
+                      <ul class="dropdown-menu" ng-show="tagId">
                           <li ng-click="setStatus('light','broken')"><i class='glyphicon glyphicon-remove-circle'/></li>
                           <li ng-click="setStatus('light','working')"><i class='glyphicon glyphicon-ok-circle'/></li>
                       </ul>
@@ -37,7 +37,7 @@
         </div>
     </div>
 
-    <div class="create" ng-click="createEvent()" ng-show="(status == 'free' || status == 'free noMore') && tagId" stop-event>
+    <div class="create" ng-click="createEvent()" ng-show="(timeDiff >= 30) && tagId" stop-event>
         <i class="glyphicon glyphicon-plus-sign"/>
     </div>
 
@@ -45,6 +45,8 @@
         <i class="glyphicon glyphicon-circle-arrow-left"/>
     </div>
 
-    {{tagId}}
+    <div class="nfcUser">
+        User logged in - {{tagId}}
+    </div>
 
 </div>

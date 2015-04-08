@@ -11,28 +11,35 @@ angular.module('t2EventsApp')
 
     .controller('mainCtrl', function ($scope, Restangular, $interval, $location, $cordovaNfc) {
 
-        //Because of the problem about the async-ness of the nfc plugin, we need to wait
-        //for it to be ready.
+        // Because of the problem about the async-ness of the nfc plugin, we need to wait
+        // for it to be ready.
         $cordovaNfc.then(function (nfcInstance) {
-            //Use the plugins interface as you go, in a more "angular" way
+            // Use the plugins interface as you go, in a more "angular" way
             nfcInstance.addTagDiscoveredListener(function (event) {
-                //Callback when ndef got triggered
-                $scope.tagId = event.tag.id;
-                //alert(event.tag.id);
+                console.log(event.tag.id);
+                // Callback when ndef got triggered
+                if (event.tag.id == '50,3,32,36') {
+                    $scope.tagId = 'Jurijs Kobecs'
+                } else if (event.tag.id == '82,3,32,36') {
+                    $scope.tagId = 'Jurijs Kolomijecs'
+                } else {
+                    $scope.tagId = 'Some employee - ' + event.tag.id;
+                }
+               // alert(event.tag.id);
             })
                 .then(
-                //Success callback
+                // Success callback
                 function (event) {
                     $scope.tagId = event.tag.id;
-                    //alert(event.tag.id);
+                    console.log(event.tag.id);
                 },
-                //Fail callback
+                // Fail callback
                 function (err) {
                     console.log(err);
                 });
         });
 
-        $scope.logOut = function() {
+        $scope.logOut = function () {
             window.localStorage.removeItem('apikey');
             $location.path('login'); // path not hash
         }
@@ -41,9 +48,9 @@ angular.module('t2EventsApp')
 
         function refreshData() {
 
-            //Determines the time zone of the browser client
-            //tz lib or ECMA 6 Intl API for modern browsers
-            //var tz = jstz.determine();
+            // Determines the time zone of the browser client
+            // tz lib or ECMA 6 Intl API for modern browsers
+            // var tz = jstz.determine();
             var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
             if (!timeZone) {
                 var tz = jstz.determine(); // Determines the time zone of the browser client
@@ -91,6 +98,7 @@ angular.module('t2EventsApp')
                         } else if (startTime > currentTime) {
                             $scope.status = 'free';
                             $scope.meetingWill = 'Starts in ' + moment.preciseDiff(currentTime, startTime);
+                            $scope.timeDiff = moment.preciseDiff(currentTime, startTime);
                         }
 
                     } else {
