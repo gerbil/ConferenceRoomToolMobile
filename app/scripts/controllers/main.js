@@ -11,33 +11,50 @@ angular.module('t2EventsApp')
 
     .controller('mainCtrl', function ($scope, Restangular, $interval, $location, $cordovaNfc) {
 
-        // Because of the problem about the async-ness of the nfc plugin, we need to wait
-        // for it to be ready.
-        $cordovaNfc.then(function (nfcInstance) {
-            // Use the plugins interface as you go, in a more "angular" way
-            nfcInstance.addTagDiscoveredListener(function (event) {
-                console.log(event.tag.id);
-                // Callback when ndef got triggered
-                if (event.tag.id == '50,3,32,36') {
-                    $scope.tagId = 'Jurijs Kobecs'
-                } else if (event.tag.id == '82,3,32,36') {
-                    $scope.tagId = 'Jurijs Kolomijecs'
-                } else {
-                    $scope.tagId = 'Some employee - ' + event.tag.id;
-                }
-               // alert(event.tag.id);
-            })
-                .then(
-                // Success callback
-                function (event) {
-                    $scope.tagId = event.tag.id;
-                    console.log(event.tag.id);
-                },
-                // Fail callback
-                function (err) {
-                    console.log(err);
-                });
+        // NFC +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        function refreshNfc() {
+            // Because of the problem about the async-ness of the nfc plugin, we need to wait
+            // for it to be ready.
+            $cordovaNfc.then(function (nfcInstance) {
+                // Use the plugins interface as you go, in a more "angular" way
+                nfcInstance.addTagDiscoveredListener(function (event) {
+                    // Callback when ndef got triggered
+                    if (event.tag.id == '50,3,32,36') {
+                        $scope.tagId = 'Jurijs Kobecs'
+                    } else if (event.tag.id == '82,3,32,36') {
+                        $scope.tagId = 'Jurijs Kolomijecs'
+                    } else {
+                        $scope.tagId = 'Some employee - ' + event.tag.id;
+                    }
+
+                })
+                    .then(
+                    // Success callback
+                    function (event) {
+                    },
+                    // Fail callback
+                    function (err) {
+                        console.log(err);
+                    });
+            });
+
+        };
+
+        // Auto start for Nfc
+        refreshNfc();
+
+        // Promise should be created to be deleted afterwards
+        var promise = $interval(refreshNfc, 2000);
+
+        // Cancel interval on page changes
+        $scope.$on('$destroy', function () {
+            if (angular.isDefined(promise)) {
+                $interval.cancel(promise);
+                promise = undefined;
+            }
         });
+        // Data refresh end
 
         $scope.logOut = function () {
             window.localStorage.removeItem('apikey');
@@ -79,7 +96,7 @@ angular.module('t2EventsApp')
                     // Fetch only one scheduled event
                     $scope.nextEvent = results[1].value[0];
                     // If there are no events today -> skip, otherwise change timezone for LV or SWE, also change meetingText
-                    //TODO : auto timezone change
+                    //TODO: auto timezone change
                     if ($scope.nextEvent) {
                         // LV settings for a timezone
                         $scope.nextEvent.Start = moment($scope.nextEvent.Start).format('HH:mm');
@@ -98,7 +115,8 @@ angular.module('t2EventsApp')
                         } else if (startTime > currentTime) {
                             $scope.status = 'free';
                             $scope.meetingWill = 'Starts in ' + moment.preciseDiff(currentTime, startTime);
-                            $scope.timeDiff = moment.preciseDiff(currentTime, startTime);
+                            // Time diff betweeb start time and current time for internal use
+                            $scope.timeDiff = startTime.diff(currentTime.add(1, 'hour'), 'minutes');
                         }
 
                     } else {
@@ -113,7 +131,7 @@ angular.module('t2EventsApp')
         refreshData();
 
         // Promise should be created to be deleted afterwards
-        var promise = $interval(refreshData, 100000);
+        var promise = $interval(refreshData, 30000);
 
         // Cancel interval on page changes
         $scope.$on('$destroy', function () {
@@ -136,7 +154,7 @@ angular.module('t2EventsApp')
 
             // Send email if broken
             if (status === 'broken') {
-                var post = {'room': $scope.roomName, 'resource': resource};
+                var post = {'room': $scope.roomName, 'resource': resource, 'user': $scope.tagId};
                 // Rest API communication -> send email to ServiceDesk with room name and resource info
                 Restangular.all('broken').post(post)
                     .then(function () {
@@ -161,10 +179,12 @@ angular.module('t2EventsApp')
             Restangular.all('rooms/calendar/create').post({'apikey': apikey, 'start': moment().tz(timeZone).subtract(2, 'hour').format('YYYY-MM-DDTHH:mm:ssZ'), 'end': moment().tz(timeZone).subtract(2, 'hour').add(30, 'minutes').format('YYYY-MM-DDTHH:mm:ssZ')});
         };
 
-    })
+    }
+)
 
     // event stopPropagation directive to stop click event from firing parent's click events
-    .directive('stopEvent', function () {
+    .
+    directive('stopEvent', function () {
         return {
             restrict: 'A',
             link: function (scope, element) {

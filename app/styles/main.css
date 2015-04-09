@@ -146,7 +146,6 @@ body {
     }
 
 .logOut {
-    color: #161b1f;
     margin: 41em 0px 0px 2em;
 }
 
@@ -155,7 +154,9 @@ body {
     }
 
 .nfcUser {
-    margin: 0px 0px 0px 4em;
+    font-size: 1.5em;
+    margin: 29em 0px 0px 2.2em;
+    color: #9c9d9e;
 }
 
 /* INFO SCREEN *******************************************************************/
