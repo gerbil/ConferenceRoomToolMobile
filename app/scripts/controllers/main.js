@@ -21,9 +21,9 @@ angular.module('t2EventsApp')
                 nfcInstance.addTagDiscoveredListener(function (event) {
                     // Callback when ndef got triggered
                     if (event.tag.id == '50,3,32,36') {
-                        $scope.tagId = 'Jurijs Kobecs'
+                        $scope.tagId = 'Jurijs Kobecs';
                     } else if (event.tag.id == '82,3,32,36') {
-                        $scope.tagId = 'Jurijs Kolomijecs'
+                        $scope.tagId = 'Jurijs Kolomijecs';
                     } else {
                         $scope.tagId = 'Some employee - ' + event.tag.id;
                     }
@@ -31,7 +31,7 @@ angular.module('t2EventsApp')
                 })
                     .then(
                     // Success callback
-                    function (event) {
+                    function () {
                     },
                     // Fail callback
                     function (err) {
@@ -39,19 +39,19 @@ angular.module('t2EventsApp')
                     });
             });
 
-        };
+        }
 
         // Auto start for Nfc
         refreshNfc();
 
         // Promise should be created to be deleted afterwards
-        var promise = $interval(refreshNfc, 2000);
+        var refreshNfcPromise = $interval(refreshNfc, 2000);
 
         // Cancel interval on page changes
         $scope.$on('$destroy', function () {
-            if (angular.isDefined(promise)) {
-                $interval.cancel(promise);
-                promise = undefined;
+            if (angular.isDefined(refreshNfcPromise)) {
+                $interval.cancel(refreshNfcPromise);
+                refreshNfcPromise = undefined;
             }
         });
         // Data refresh end
@@ -59,7 +59,7 @@ angular.module('t2EventsApp')
         $scope.logOut = function () {
             window.localStorage.removeItem('apikey');
             $location.path('login'); // path not hash
-        }
+        };
 
         // Today events +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -117,6 +117,47 @@ angular.module('t2EventsApp')
                             $scope.meetingWill = 'Starts in ' + moment.preciseDiff(currentTime, startTime);
                             // Time diff betweeb start time and current time for internal use
                             $scope.timeDiff = startTime.diff(currentTime.add(1, 'hour'), 'minutes');
+                        } else if (startTime === currentTime) {
+                            $scope.meetingWill = 'Ends now';
+                        }
+
+                    } else {
+                        $scope.status = 'free noMore';
+                        $scope.meetingText = 'No more meetings today';
+                        $scope.meetingWill = '';
+                        $scope.timeDiff = -1;
+                    }
+                });
+
+            // Tomorrow
+            Restangular.all('rooms/calendar').getList({'apikey': apikey, 'startDateTime': today, 'endDateTime': tomorrow})
+                .then(function (results) {
+                    // Fetch only room name
+                    $scope.roomName = results[0];
+                    // Fetch only one scheduled event
+                    $scope.nextEvent = results[1].value[0];
+                    // If there are no events today -> skip, otherwise change timezone for LV or SWE, also change meetingText
+                    //TODO: auto timezone change
+                    if ($scope.nextEvent) {
+                        // LV settings for a timezone
+                        $scope.nextEvent.Start = moment($scope.nextEvent.Start).format('HH:mm');
+                        $scope.nextEvent.End = moment($scope.nextEvent.End).format('HH:mm');
+                        $scope.nextEvent.time = $scope.nextEvent.Start + ' - ' + $scope.nextEvent.End;
+                        $scope.meetingText = ($scope.nextEvent.Start) > $scope.currentTime ? 'Next meeting' : 'Current meeting';
+
+                        var currentTime = moment($scope.currentTime, 'HH:mm');
+                        var startTime = moment($scope.nextEvent.Start, 'HH:mm');
+                        var endTime = moment($scope.nextEvent.End, 'HH:mm');
+
+                        // Meeting will start in, else meeting will end in
+                        if (currentTime > startTime) {
+                            $scope.status = 'busy';
+                            $scope.meetingWill = 'Ends in ' + moment.preciseDiff(currentTime, endTime);
+                        } else if (startTime > currentTime) {
+                            $scope.status = 'free';
+                            $scope.meetingWill = 'Starts in ' + moment.preciseDiff(currentTime, startTime);
+                            // Time diff betweeb start time and current time for internal use
+                            $scope.timeDiff = startTime.diff(currentTime.add(1, 'hour'), 'minutes');
                         }
 
                     } else {
@@ -131,13 +172,13 @@ angular.module('t2EventsApp')
         refreshData();
 
         // Promise should be created to be deleted afterwards
-        var promise = $interval(refreshData, 30000);
+        var refreshDataPromise = $interval(refreshData, 30000);
 
         // Cancel interval on page changes
         $scope.$on('$destroy', function () {
-            if (angular.isDefined(promise)) {
-                $interval.cancel(promise);
-                promise = undefined;
+            if (angular.isDefined(refreshDataPromise)) {
+                $interval.cancel(refreshDataPromise);
+                refreshDataPromise = undefined;
             }
         });
         // Data refresh end

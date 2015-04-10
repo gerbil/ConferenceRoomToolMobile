@@ -9,12 +9,17 @@
  */
 angular.module('t2EventsApp')
 
-    .controller('loginCtrl', function ($scope, Restangular, $location, $ionicPlatform, $cordovaStatusbar) {
+    .controller('loginCtrl', function ($scope, Restangular, $location, $ionicPlatform, $cordovaStatusbar, $cordovaScreen) {
 
         // FullScreen
-        if(window.StatusBar) {
+        //$cordovaStatusbar.hide();
+
+        //window.keepScreenOn.enable();
+
+        $ionicPlatform.ready(function() {
             $cordovaStatusbar.hide();
-        }
+            $cordovaScreen.keepOn();
+        });
 
         // Check localStorage for apikey
         var apikey = window.localStorage.getItem('apikey');
@@ -25,7 +30,7 @@ angular.module('t2EventsApp')
             $location.path('main'); // path not hash
             //console.info('Apikey found in localStorage - ' + apikey);
         } else {
-            $scope.login = function(username, password) {
+            $scope.login = function (username, password) {
                 // Rest API communication -> send username + password, get token
                 Restangular.all('login').post({'username': username, 'password': password})
                     .then(function (result) {
@@ -35,7 +40,7 @@ angular.module('t2EventsApp')
                         window.localStorage.setItem('apikey', $scope.apikey);
                         // Redirect to a main screen
                         $location.path('main'); // path not hash
-                    }, function() {
+                    }, function () {
                         // Error response from the server.
                         $scope.loginForm.username.$setValidity('', false);
                         $scope.loginForm.password.$setValidity('', false);

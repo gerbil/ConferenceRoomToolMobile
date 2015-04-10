@@ -53,11 +53,11 @@ body {
     margin: 0;
     position: fixed;
     width: 100%;
-    top: 15%;
+    top: 10%;
 }
 
 .head {
-    margin-bottom: 10em;
+    margin-bottom: 12em;
 }
 
     .location {
@@ -107,7 +107,7 @@ body {
 
     /* Resource broken alarm dialog */
     ul.dropdown-menu {
-        margin: -310px 0 0 -48px;
+        margin: 0 0 0 -48px;
         width: 254px;
         background: transparent;
         color: #f8f8f8;
@@ -177,15 +177,25 @@ body {
         color: #9c9d9e;
     }
 
+    .meetingInfo .org {
+        margin-top: 1em;
+    }
+
     .meetingInfo .next {
         color: #ffffff;
     }
 
     .meetingInfo .will {
-        margin-top: 2em;
+        margin-top: 1em;
     }
 
     .noMore .meetingInfo .next {
         margin-top: 3em;
         font-size: 2.5em;
     }
+
+button#zombie {
+    /*background: #161b1f;*/
+    height: 200px;
+    width: 200px;
+}
