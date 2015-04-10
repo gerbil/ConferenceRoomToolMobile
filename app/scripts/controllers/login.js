@@ -18,7 +18,9 @@ angular.module('t2EventsApp')
 
         $ionicPlatform.ready(function() {
             $cordovaStatusbar.hide();
-            $cordovaScreen.keepOn();
+           //$cordovaScreen.keepOn();
+            keepscreenon.enable();
+            AndroidFullScreen.immersiveMode();
         });
 
         // Check localStorage for apikey
