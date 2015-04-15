@@ -1,0 +1,57 @@
+{
+    "org.apache.cordova.statusbar": {
+        "source": {
+            "type": "registry",
+            "id": "org.apache.cordova.statusbar"
+        }
+    },
+    "com.chariotsolutions.nfc.plugin": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/chariotsolutions/phonegap-nfc",
+            "subdir": "."
+        }
+    },
+    "nl.x-services.plugins.insomnia": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/EddyVerbruggen/Insomnia-PhoneGap-Plugin.git",
+            "subdir": "."
+        }
+    },
+    "com.mediamatrixdoo.keepscreenon": {
+        "source": {
+            "type": "git",
+            "url": "git://github.com/zoxxx/PhoneGap-KeepScreenOn-plugin.git",
+            "subdir": "."
+        }
+    },
+    "com.groupahead.screen": {
+        "source": {
+            "type": "git",
+            "url": "git://github.com/jfrumar/ScreenPlugin.git",
+            "subdir": "."
+        }
+    },
+    "com.mesmotronic.plugins.fullscreen": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/mesmotronic/cordova-fullscreen-plugin.git",
+            "subdir": "."
+        }
+    },
+    "com.asxtecnologia.startup": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/asxtecnologia/phonegap-startup.git",
+            "subdir": "."
+        }
+    },
+    "com.tsubik.cordova.plugin.start-on-boot": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/tsubik/cordova-plugin-start-on-boot.git",
+            "subdir": "."
+        }
+    }
+}

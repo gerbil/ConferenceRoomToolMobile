@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="com.asxtecnologia.startup"
+        version="2.0.1">
+
+  <name>Startup</name>
+
+  <description>
+   Inicia o aplicativo no no startup do aparelho
+  </description>
+
+  <license>MIT</license>
+
+  <engines>
+    <engine name="cordova" version=">=3.0.0"/>
+  </engines>
+
+  <js-module src="www/Startup.js" name="Startup">
+    <clobbers target="window.plugins.startup" />
+  </js-module>
+
+  <!-- android -->
+  <platform name="android">
+
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="Startup">
+        <param name="android-package" value="com.asxtecnologia.startup" />
+      </feature>
+    </config-file>    
+    <source-file src="src/android/StartOnBoot.java" target-dir="src/com/asxtecnologia/startup"/>
+    <source-file src="src/android/StartUpActivity.java" target-dir="src/com/asxtecnologia/startup"/>
+    <source-file src="src/android/StartService.java" target-dir="src/com/asxtecnologia/startup"/>
+     <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+            <uses-permission android:name="android.permission.VIBRATE" />
+        </config-file>   
+     <config-file target="AndroidManifest.xml" parent="/manifest/application">
+
+            <receiver android:name="com.asxtecnologia.startup.StartOnBoot">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED">
+                </action>
+            </intent-filter>
+        </receiver>
+        <service android:name="com.asxtecnologia.startup.StartService"  android:exported="false">
+       </service> 
+                <activity android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale" android:label="@string/app_name" android:launchMode="singleTop" android:name="com.asxtecnologia.startup.StartUpActivity" android:theme="@android:style/Theme.Black.NoTitleBar">
+        </activity>
+        </config-file>
+
+
+  </platform>
+
+
+</plugin>

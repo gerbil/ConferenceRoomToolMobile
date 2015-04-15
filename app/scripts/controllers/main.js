@@ -149,6 +149,9 @@ angular.module('t2EventsApp')
                         var startTime = moment($scope.nextEvent.Start, 'HH:mm');
                         var endTime = moment($scope.nextEvent.End, 'HH:mm');
 
+                        // Time diff betweeb start time and current time for internal use
+                        $scope.timeDiff = startTime.diff(currentTime, 'minutes');
+
                         // Meeting will start in, else meeting will end in
                         if (currentTime > startTime) {
                             $scope.status = 'busy';
@@ -156,8 +159,6 @@ angular.module('t2EventsApp')
                         } else if (startTime > currentTime) {
                             $scope.status = 'free';
                             $scope.meetingWill = 'Starts in ' + moment.preciseDiff(currentTime, startTime);
-                            // Time diff betweeb start time and current time for internal use
-                            $scope.timeDiff = startTime.diff(currentTime.add(1, 'hour'), 'minutes');
                         }
 
                     } else {
@@ -217,7 +218,13 @@ angular.module('t2EventsApp')
             // Rest API communication -> create calendar event using startdatetime and enddatetime
             // We need to substract 2 hours due to Outlook diff
             // Make it 30 mins length from current time
-            Restangular.all('rooms/calendar/create').post({'apikey': apikey, 'start': moment().tz(timeZone).subtract(2, 'hour').format('YYYY-MM-DDTHH:mm:ssZ'), 'end': moment().tz(timeZone).subtract(2, 'hour').add(30, 'minutes').format('YYYY-MM-DDTHH:mm:ssZ')});
+            Restangular.all('rooms/calendar/create').post({'apikey': apikey, 'start': moment().tz(timeZone).format('YYYY-MM-DDTHH:mm:ssZ'), 'end': moment().tz(timeZone).add(30, 'minutes').format('YYYY-MM-DDTHH:mm:ssZ')})
+                .then(function () {
+                    $scope.status = 'busy';
+                    refreshData();
+                }, function () {
+                    console.log('Error in create meeting response');
+                });
         };
 
     }

@@ -1,0 +1,117 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "res/xml/config.xml": {
+                "parents": {
+                    "/widget": [
+                        {
+                            "xml": "<feature name=\"NfcPlugin\"><param name=\"android-package\" value=\"com.chariotsolutions.nfc.plugin.NfcPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        }
+                    ],
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Keyboard\"><param name=\"android-package\" value=\"com.ionic.keyboard.IonicKeyboard\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"AndroidFullScreen\"><param name=\"android-package\" value=\"com.mesmotronic.plugins.FullScreenPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"StatusBar\"><param name=\"android-package\" value=\"org.apache.cordova.statusbar.StatusBar\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Startup\"><param name=\"android-package\" value=\"com.asxtecnologia.startup\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "AndroidManifest.xml": {
+                "parents": {
+                    "/manifest": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.NFC\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-feature android:name=\"android.hardware.nfc\" android:required=\"false\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest/application": [
+                        {
+                            "xml": "<receiver android:name=\"com.asxtecnologia.startup.StartOnBoot\"><intent-filter><action android:name=\"android.intent.action.BOOT_COMPLETED\"></action></intent-filter></receiver>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<service android:exported=\"false\" android:name=\"com.asxtecnologia.startup.StartService\"></service>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<activity android:configChanges=\"orientation|keyboardHidden|keyboard|screenSize|locale\" android:label=\"@string/app_name\" android:launchMode=\"singleTop\" android:name=\"com.asxtecnologia.startup.StartUpActivity\" android:theme=\"@android:style/Theme.Black.NoTitleBar\"></activity>",
+                            "count": 1
+                        }
+                    ],
+                    "/*": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.VIBRATE\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"KeepScreenOn\"><param name=\"android-package\" value=\"com.mediamatrixdoo.keepscreenon.KeepScreenOn\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "com.chariotsolutions.nfc.plugin": {
+            "PACKAGE_NAME": "com.example.ConferenceRoomToolMobile"
+        },
+        "com.ionic.keyboard": {
+            "PACKAGE_NAME": "com.example.ConferenceRoomToolMobile"
+        },
+        "com.mediamatrixdoo.keepscreenon": {
+            "PACKAGE_NAME": "com.example.ConferenceRoomToolMobile"
+        },
+        "com.mesmotronic.plugins.fullscreen": {
+            "PACKAGE_NAME": "com.example.ConferenceRoomToolMobile"
+        },
+        "org.apache.cordova.console": {
+            "PACKAGE_NAME": "com.example.ConferenceRoomToolMobile"
+        },
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "com.example.ConferenceRoomToolMobile"
+        },
+        "org.apache.cordova.statusbar": {
+            "PACKAGE_NAME": "com.example.ConferenceRoomToolMobile"
+        },
+        "com.asxtecnologia.startup": {
+            "PACKAGE_NAME": "com.example.ConferenceRoomToolMobile"
+        }
+    },
+    "dependent_plugins": {}
+}
