@@ -12,33 +12,70 @@ angular.module('t2EventsApp')
     .controller('mainCtrl', function ($scope, Restangular, $interval, $location, $cordovaNfc) {
 
         // NFC +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // Because of the problem about the async-ness of the nfc plugin, we need to wait for it to be ready.
+        $cordovaNfc.then(function (nfcInstance) {
+            // Use the plugins interface as you go, in a more "angular" way
+            nfcInstance.addTagDiscoveredListener(function (event) {
+                checkNfcTag(event);
+            })
+                .then(
+                // Success callback
+                function () {
+                },
+                // Fail callback
+                function (err) {
+                    console.log(err);
+                });
+        });
 
+        // Callback when ndef got triggered
+        function checkNfcTag(event) {
+            if (event) {
+                // Set localStorage for card id
+                window.localStorage.setItem('auth', event.tag.id);
+                // Set localStorage for auth timestamp
+                window.localStorage.setItem('authTime', moment().format('YYYY-MM-DDTHH:mm:ss'));
+                if (event.tag.id == '50,3,32,36') {
+                    $scope.tagId = 'Jurijs Kobecs';
+                } else if (event.tag.id == '82,3,32,36') {
+                    $scope.tagId = 'Jurijs Kolomijecs';
+                } else {
+                    $scope.tagId = 'Some employee - ' + event.tag.id;
+                }
+            }
+        }
+
+        // Refresh dummy function for android to fetch nfc card every 2 secs
         function refreshNfc() {
-            // Because of the problem about the async-ness of the nfc plugin, we need to wait
-            // for it to be ready.
-            $cordovaNfc.then(function (nfcInstance) {
-                // Use the plugins interface as you go, in a more "angular" way
-                nfcInstance.addTagDiscoveredListener(function (event) {
-                    // Callback when ndef got triggered
-                    if (event.tag.id == '50,3,32,36') {
-                        $scope.tagId = 'Jurijs Kobecs';
-                    } else if (event.tag.id == '82,3,32,36') {
-                        $scope.tagId = 'Jurijs Kolomijecs';
-                    } else {
-                        $scope.tagId = 'Some employee - ' + event.tag.id;
-                    }
+            // Check localStorage for auth nfc id
+            var auth = window.localStorage.getItem('auth');
+            // If auth nfc id present
+            if (typeof(auth) !== 'undefined' && auth !== null) {
+                // Check auth timestamp
+                var authTime = localStorage.getItem('authTime');
+                // Make it moment like
+                authTime = moment(authTime, 'YYYY-MM-DDTHH:mm:ss');
+                // Get current timestamp
+                // Determines the time zone of the browser client
+                // tz lib or ECMA 6 Intl API for modern browsers
+                // var tz = jstz.determine();
+                var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                if (!timeZone) {
+                    var tz = jstz.determine(); // Determines the time zone of the browser client
+                    timeZone = tz.name();
 
-                })
-                    .then(
-                    // Success callback
-                    function () {
-                    },
-                    // Fail callback
-                    function (err) {
-                        console.log(err);
-                    });
-            });
-
+                }
+                var currentTime = moment().tz(timeZone).format('YYYY-MM-DDTHH:mm:ss');
+                // Time diff between current timestamp and auth
+                var authTimeDiff = authTime.diff(currentTime, 'seconds');
+                $scope.authTimeDiff = authTimeDiff;
+                // If its more than minute -> clear it out
+                if (authTimeDiff > -60) {
+                    window.localStorage.removeItem('auth');
+                    window.localStorage.removeItem('authTime');
+                    $scope.tagId = null;
+                }
+            }
         }
 
         // Auto start for Nfc
@@ -54,15 +91,11 @@ angular.module('t2EventsApp')
                 refreshNfcPromise = undefined;
             }
         });
-        // Data refresh end
+        // NFC refresh end
+        // NFC ---------------------------------------------------------------------------
 
-        $scope.logOut = function () {
-            window.localStorage.removeItem('apikey');
-            $location.path('login'); // path not hash
-        };
 
-        // Today events +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+        // EVENTS FROM CURRENT TIMESTAMP +++++++++++++++++++++++++++++++++++++++++++++++++
         function refreshData() {
 
             // Determines the time zone of the browser client
@@ -124,12 +157,13 @@ angular.module('t2EventsApp')
                     } else {
                         $scope.status = 'free noMore';
                         $scope.meetingText = 'No more meetings today';
-                        $scope.meetingWill = '';
+                        $scope.meetingWill = 'Starts now';
                         $scope.timeDiff = -1;
                     }
                 });
+            // EVENTS FROM CURRENT TIMESTAMP ------------------------------------------------
 
-            // Tomorrow
+            // FULL DAY EVENTS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             Restangular.all('rooms/calendar').getList({'apikey': apikey, 'startDateTime': today, 'endDateTime': tomorrow})
                 .then(function (results) {
                     // Fetch only room name
@@ -149,7 +183,7 @@ angular.module('t2EventsApp')
                         var startTime = moment($scope.nextEvent.Start, 'HH:mm');
                         var endTime = moment($scope.nextEvent.End, 'HH:mm');
 
-                        // Time diff betweeb start time and current time for internal use
+                        // Time diff between start time and current time for internal use
                         $scope.timeDiff = startTime.diff(currentTime, 'minutes');
 
                         // Meeting will start in, else meeting will end in
@@ -167,6 +201,7 @@ angular.module('t2EventsApp')
                         $scope.meetingWill = '';
                     }
                 });
+            // FULL DAY EVENTS ---------------------------------------------------------------
         }
 
         // Auto start
@@ -184,6 +219,8 @@ angular.module('t2EventsApp')
         });
         // Data refresh end
 
+
+        // RESOURCES +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Retrieve resource statuses from local storage
         $scope.beamer = localStorage.getItem('beamer') ? localStorage.getItem('beamer') : 'working';
         $scope.whiteboard = localStorage.getItem('whiteboard') ? localStorage.getItem('whiteboard') : 'working';
@@ -204,12 +241,15 @@ angular.module('t2EventsApp')
                     });
             }
         };
+        // RESOURCES --------------------------------------------------------------------
+
 
         // To the Info screen
         $scope.openInfo = function () {
             $location.path('info'); // path not hash
         };
 
+        // INSTANT MEETING +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Send a timestamp to create an instant meeting
         $scope.createEvent = function () {
             // Check localStorage for apikey
@@ -226,13 +266,18 @@ angular.module('t2EventsApp')
                     console.log('Error in create meeting response');
                 });
         };
+        // INSTANT MEETING -----------------------------------------------------------------
+
+        $scope.logOut = function () {
+            window.localStorage.removeItem('apikey');
+            $location.path('login'); // path not hash
+        };
 
     }
 )
 
     // event stopPropagation directive to stop click event from firing parent's click events
-    .
-    directive('stopEvent', function () {
+    .directive('stopEvent', function () {
         return {
             restrict: 'A',
             link: function (scope, element) {

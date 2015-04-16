@@ -53,5 +53,12 @@
             "url": "https://github.com/tsubik/cordova-plugin-start-on-boot.git",
             "subdir": "."
         }
+    },
+    "com.livesure.plugins.locktask": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/livesure/cordova-plugin-locktask.git",
+            "subdir": "."
+        }
     }
 }

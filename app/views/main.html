@@ -37,7 +37,9 @@
         </div>
     </div>
 
-    <div class="create" ng-click="createEvent()" ng-show="(timeDiff > 30 && timeDiff > 0) && tagId" stop-event>
+    {{authTimeDiff}}
+
+    <div class="create" ng-click="createEvent()" ng-show="(timeDiff > 30) && tagId" stop-event>
         <i class="glyphicon glyphicon-plus-sign"/>
     </div>
 

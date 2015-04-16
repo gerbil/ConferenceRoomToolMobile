@@ -33,6 +33,10 @@
                         {
                             "xml": "<feature name=\"Startup\"><param name=\"android-package\" value=\"com.asxtecnologia.startup\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"LockTask\"><param name=\"android-package\" value=\"com.livesure.plugins.LockTask\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -110,6 +114,9 @@
             "PACKAGE_NAME": "com.example.ConferenceRoomToolMobile"
         },
         "com.asxtecnologia.startup": {
+            "PACKAGE_NAME": "com.example.ConferenceRoomToolMobile"
+        },
+        "com.livesure.plugins.locktask": {
             "PACKAGE_NAME": "com.example.ConferenceRoomToolMobile"
         }
     },
