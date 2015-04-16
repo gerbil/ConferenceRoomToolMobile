@@ -129,7 +129,7 @@ angular.module('t2EventsApp')
                     } else {
                         $scope.status = 'free noMore';
                         $scope.meetingText = 'No more meetings today';
-                        $scope.meetingWill = 'Starts now';
+                        $scope.meetingWill = '';
                         $scope.timeDiff = -1;
                     }
                 });
@@ -171,6 +171,7 @@ angular.module('t2EventsApp')
                         $scope.status = 'free noMore';
                         $scope.meetingText = 'No more meetings today';
                         $scope.meetingWill = '';
+                        $scope.timeDiff = 999;
                     }
                 });
             // FULL DAY EVENTS ---------------------------------------------------------------
@@ -184,16 +185,6 @@ angular.module('t2EventsApp')
                 var authTime = localStorage.getItem('authTime');
                 // Make it moment like
                 authTime = moment(authTime, 'YYYY-MM-DDTHH:mm:ss');
-                // Get current timestamp
-                // Determines the time zone of the browser client
-                // tz lib or ECMA 6 Intl API for modern browsers
-                // var tz = jstz.determine();
-                var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                if (!timeZone) {
-                    var tz = jstz.determine(); // Determines the time zone of the browser client
-                    timeZone = tz.name();
-
-                }
                 var currentTime = moment().tz(timeZone).format('YYYY-MM-DDTHH:mm:ss');
                 // Time diff between current timestamp and auth
                 var authTimeDiff = authTime.diff(currentTime, 'seconds');
