@@ -21,7 +21,7 @@ angular.module('t2EventsApp')
             $cordovaScreen.keepOn();
             keepscreenon.enable();
             AndroidFullScreen.immersiveMode();
-            locktask.startLockTask();
+            window.plugins.locktask.startLockTask();
         });
 
         // Check localStorage for apikey

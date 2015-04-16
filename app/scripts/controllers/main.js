@@ -47,35 +47,7 @@ angular.module('t2EventsApp')
 
         // Refresh dummy function for android to fetch nfc card every 2 secs
         function refreshNfc() {
-            // Check localStorage for auth nfc id
-            var auth = window.localStorage.getItem('auth');
-            // If auth nfc id present
-            if (typeof(auth) !== 'undefined' && auth !== null) {
-                // Check auth timestamp
-                var authTime = localStorage.getItem('authTime');
-                // Make it moment like
-                authTime = moment(authTime, 'YYYY-MM-DDTHH:mm:ss');
-                // Get current timestamp
-                // Determines the time zone of the browser client
-                // tz lib or ECMA 6 Intl API for modern browsers
-                // var tz = jstz.determine();
-                var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                if (!timeZone) {
-                    var tz = jstz.determine(); // Determines the time zone of the browser client
-                    timeZone = tz.name();
-
-                }
-                var currentTime = moment().tz(timeZone).format('YYYY-MM-DDTHH:mm:ss');
-                // Time diff between current timestamp and auth
-                var authTimeDiff = authTime.diff(currentTime, 'seconds');
-                $scope.authTimeDiff = authTimeDiff;
-                // If its more than minute -> clear it out
-                if (authTimeDiff > -60) {
-                    window.localStorage.removeItem('auth');
-                    window.localStorage.removeItem('authTime');
-                    $scope.tagId = null;
-                }
-            }
+           //
         }
 
         // Auto start for Nfc
@@ -202,6 +174,39 @@ angular.module('t2EventsApp')
                     }
                 });
             // FULL DAY EVENTS ---------------------------------------------------------------
+
+            // NFC LOGOUT +++++++++++++++++++++++++++++++++++++++++++++++++++
+            // Check localStorage for auth nfc id
+            var auth = window.localStorage.getItem('auth');
+            // If auth nfc id present
+            if (typeof(auth) !== 'undefined' && auth !== null) {
+                // Check auth timestamp
+                var authTime = localStorage.getItem('authTime');
+                // Make it moment like
+                authTime = moment(authTime, 'YYYY-MM-DDTHH:mm:ss');
+                // Get current timestamp
+                // Determines the time zone of the browser client
+                // tz lib or ECMA 6 Intl API for modern browsers
+                // var tz = jstz.determine();
+                var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                if (!timeZone) {
+                    var tz = jstz.determine(); // Determines the time zone of the browser client
+                    timeZone = tz.name();
+
+                }
+                var currentTime = moment().tz(timeZone).format('YYYY-MM-DDTHH:mm:ss');
+                // Time diff between current timestamp and auth
+                var authTimeDiff = authTime.diff(currentTime, 'seconds');
+                $scope.authTimeDiff = authTimeDiff;
+                // If its more than minute -> clear it out
+                if (authTimeDiff < -60) {
+                    window.localStorage.removeItem('auth');
+                    window.localStorage.removeItem('authTime');
+                    $scope.tagId = null;
+                    $scope.authTimeDiff = null;
+                }
+            }
+            // NFC LOGOUT-------------------------------------------------------
         }
 
         // Auto start
