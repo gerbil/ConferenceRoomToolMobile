@@ -60,5 +60,12 @@
             "url": "https://github.com/livesure/cordova-plugin-locktask.git",
             "subdir": "."
         }
+    },
+    "de.neofonie.cordova.plugin.nativeaudio": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/SidneyS/cordova-plugin-nativeaudio.git",
+            "subdir": "."
+        }
     }
 }

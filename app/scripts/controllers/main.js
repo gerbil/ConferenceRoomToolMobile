@@ -9,7 +9,7 @@
  */
 angular.module('t2EventsApp')
 
-    .controller('mainCtrl', function ($scope, Restangular, $interval, $location, $cordovaNfc) {
+    .controller('mainCtrl', function ($scope, Restangular, $interval, $location, $cordovaNfc, $cordovaNativeAudio) {
 
         // NFC +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Because of the problem about the async-ness of the nfc plugin, we need to wait for it to be ready.
@@ -47,7 +47,7 @@ angular.module('t2EventsApp')
 
         // Refresh dummy function for android to fetch nfc card every 2 secs
         function refreshNfc() {
-           //
+            //
         }
 
         // Auto start for Nfc
@@ -115,9 +115,17 @@ angular.module('t2EventsApp')
 
                         // Meeting will start in, else meeting will end in
                         if (currentTime > startTime) {
+                            // LED light func busy
+                            $cordovaNativeAudio.stop('free');
+                            $cordovaNativeAudio.loop('busy');
+                            // Status
                             $scope.status = 'busy';
                             $scope.meetingWill = 'Ends in ' + moment.preciseDiff(currentTime, endTime);
                         } else if (startTime > currentTime) {
+                            // LED light func free
+                            $cordovaNativeAudio.stop('busy');
+                            $cordovaNativeAudio.loop('free');
+                            // Status
                             $scope.status = 'free';
                             $scope.meetingWill = 'Starts in ' + moment.preciseDiff(currentTime, startTime);
                             // Time diff betweeb start time and current time for internal use
@@ -131,6 +139,9 @@ angular.module('t2EventsApp')
                         $scope.meetingText = 'No more meetings today';
                         $scope.meetingWill = '';
                         $scope.timeDiff = -1;
+                        // LED light func free
+                        $cordovaNativeAudio.stop('busy');
+                        $cordovaNativeAudio.loop('free');
                     }
                 });
             // EVENTS FROM CURRENT TIMESTAMP ------------------------------------------------

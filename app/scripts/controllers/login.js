@@ -9,20 +9,18 @@
  */
 angular.module('t2EventsApp')
 
-    .controller('loginCtrl', function ($scope, Restangular, $location, $ionicPlatform, $cordovaStatusbar, $cordovaScreen) {
+    .controller('loginCtrl', function ($scope, Restangular, $location, $ionicPlatform, $cordovaStatusbar, $cordovaScreen, $cordovaNativeAudio) {
 
-        // FullScreen
-        //$cordovaStatusbar.hide();
-
-        //window.keepScreenOn.enable();
-
-        $ionicPlatform.ready(function() {
+        $ionicPlatform.ready(function () {
             $cordovaStatusbar.hide();
             $cordovaScreen.keepOn();
             keepscreenon.enable();
             AndroidFullScreen.immersiveMode();
-            window.plugins.locktask.startLockTask();
+            //window.plugins.locktask.startLockTask(null, null, 'DeviceAdminExample');
+            $cordovaNativeAudio.preloadComplex('busy', 'audio/40.mp3', 1, 1, 0);
+            $cordovaNativeAudio.preloadComplex('free', 'audio/4000.mp3', 1, 1, 0);
         });
+
 
         // Check localStorage for apikey
         var apikey = window.localStorage.getItem('apikey');
