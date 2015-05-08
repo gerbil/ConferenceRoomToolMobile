@@ -11,16 +11,20 @@ angular.module('t2EventsApp')
 
     .controller('loginCtrl', function ($scope, Restangular, $location, $ionicPlatform, $cordovaStatusbar, $cordovaScreen, $cordovaNativeAudio) {
 
-        $ionicPlatform.ready(function () {
+        /*$ionicPlatform.ready(function () {
             $cordovaStatusbar.hide();
             $cordovaScreen.keepOn();
             keepscreenon.enable();
             AndroidFullScreen.immersiveMode();
+
+            // Screen pin
             //window.plugins.locktask.startLockTask(null, null, 'DeviceAdminExample');
+            //window.plugins.locktask.startLockTask(null, null);
+
+            // BackLight feature
             $cordovaNativeAudio.preloadComplex('busy', 'audio/40.mp3', 1, 1, 0);
             $cordovaNativeAudio.preloadComplex('free', 'audio/4000.mp3', 1, 1, 0);
-        });
-
+        });*/
 
         // Check localStorage for apikey
         var apikey = window.localStorage.getItem('apikey');

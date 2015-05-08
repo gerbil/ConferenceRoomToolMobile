@@ -1,0 +1,94 @@
+/* LOGIN *****************************************************************/
+.outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.container {
+    color: #B5B7BA;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+#login {
+    width: 80%;
+    border: 0 none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    #login p.logo {
+        /*background: url("/background/logo.png") 100% no-repeat;*/
+        color: #e0e0de;
+        font-size: 4em;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 1em;
+        width: 80%;
+        height: 1em;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    #login form span {
+        margin-top: -1px;
+        margin-left: 4em;
+        background-color: #363b41;
+        display: block;
+        float: left;
+        height: 2em;
+        line-height: 2em;
+        text-align: center;
+        width: 10%;
+        font-size: 2em;
+        color: #646769;
+    }
+
+    #login form input {
+        width: 60%;
+        height: 2em;
+        border: 0px none;
+        border-radius: 0px;
+        font-size: 2em;
+        line-height: 2em;
+        padding: 0;
+        outline: none !important
+    }
+
+    #login form input[type="text"], #login input[type="password"] {
+        background-color: #3b4148;
+        color: #B5B7BA;
+        margin-bottom: 0.1em;
+        padding: 0 1em 0 0.5em;
+    }
+
+    #login form input[type="submit"] {
+        margin-left: 4em;
+        width: 70%;
+        background-color: #ea4c88;
+        color: #e0e0de;
+        font-weight: bold;
+        margin-top: 0.2em;
+        text-transform: uppercase;
+        border: 0 none;
+    }
+
+    #login form input[type="submit"]:hover {
+        background-color: #d44179;
+    }
+
+    #login > p {
+        text-align: center;
+    }
+
+    #login > p span {
+        padding-left: 5px;
+    }
+
+
+    #login input.ng-invalid {
+        border-right: 2px solid red !important;
+    }

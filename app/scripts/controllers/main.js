@@ -9,7 +9,21 @@
  */
 angular.module('t2EventsApp')
 
-    .controller('mainCtrl', function ($scope, Restangular, $interval, $location, $cordovaNfc, $cordovaNativeAudio) {
+    .controller('mainCtrl', function ($scope, Restangular, $interval, $location, $cordovaNfc, $rootScope, $aside, $cordovaNativeAudio) {
+
+        // WO for screen flash before content fetched from backend
+        $scope.hidden = 'hidden';
+
+        // Side menu
+        $scope.openMenu = function () {
+            $aside.open({
+                templateUrl: 'views/menu.html',
+                placement: 'right',
+                size: 'lg',
+                status: 'free'
+            });
+        }
+
 
         // NFC +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Because of the problem about the async-ness of the nfc plugin, we need to wait for it to be ready.
@@ -96,6 +110,9 @@ angular.module('t2EventsApp')
             // Rest API communication -> get calendarview using startdatetime and enddatetime
             Restangular.all('rooms/calendar').getList({'apikey': apikey, 'startDateTime': today, 'endDateTime': tomorrow})
                 .then(function (results) {
+
+                    $scope.hidden = '';
+
                     // Fetch only room name
                     $scope.roomName = results[0];
                     // Fetch only one scheduled event
@@ -114,20 +131,24 @@ angular.module('t2EventsApp')
                         var endTime = moment($scope.nextEvent.End, 'HH:mm');
 
                         // Meeting will start in, else meeting will end in
-                        if (currentTime > startTime) {
+                        if (currentTime >= startTime) {
                             // LED light func busy
-                            $cordovaNativeAudio.stop('free');
-                            $cordovaNativeAudio.loop('busy');
+                            //$cordovaNativeAudio.stop('free');
+                            //$cordovaNativeAudio.loop('busy');
                             // Status
                             $scope.status = 'busy';
+                            $scope.statusText = 'Room booked';
                             $scope.meetingWill = 'Ends in ' + moment.preciseDiff(currentTime, endTime);
+                            $scope.availableTimeButtonText = 'Available at ' + $scope.nextEvent.End;
                         } else if (startTime > currentTime) {
                             // LED light func free
-                            $cordovaNativeAudio.stop('busy');
-                            $cordovaNativeAudio.loop('free');
+                            //$cordovaNativeAudio.stop('busy');
+                            //$cordovaNativeAudio.loop('free');
                             // Status
                             $scope.status = 'free';
+                            $scope.statusText = 'Room available';
                             $scope.meetingWill = 'Starts in ' + moment.preciseDiff(currentTime, startTime);
+                            $scope.availableTimeButtonText = 'Next meeting at ' + $scope.nextEvent.Start;
                             // Time diff betweeb start time and current time for internal use
                             $scope.timeDiff = startTime.diff(currentTime.add(1, 'hour'), 'minutes');
                         } else if (startTime === currentTime) {
@@ -136,12 +157,13 @@ angular.module('t2EventsApp')
 
                     } else {
                         $scope.status = 'free noMore';
+                        $scope.statusText = 'Room available';
                         $scope.meetingText = 'No more meetings today';
                         $scope.meetingWill = '';
                         $scope.timeDiff = -1;
                         // LED light func free
-                        $cordovaNativeAudio.stop('busy');
-                        $cordovaNativeAudio.loop('free');
+                        //$cordovaNativeAudio.stop('busy');
+                        //$cordovaNativeAudio.loop('free');
                     }
                 });
             // EVENTS FROM CURRENT TIMESTAMP ------------------------------------------------
@@ -258,20 +280,23 @@ angular.module('t2EventsApp')
 
         // INSTANT MEETING +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Send a timestamp to create an instant meeting
-        $scope.createEvent = function () {
-            // Check localStorage for apikey
-            var apikey = window.localStorage.getItem('apikey');
-            var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            // Rest API communication -> create calendar event using startdatetime and enddatetime
-            // We need to substract 2 hours due to Outlook diff
-            // Make it 30 mins length from current time
-            Restangular.all('rooms/calendar/create').post({'apikey': apikey, 'start': moment().tz(timeZone).format('YYYY-MM-DDTHH:mm:ssZ'), 'end': moment().tz(timeZone).add(30, 'minutes').format('YYYY-MM-DDTHH:mm:ssZ')})
-                .then(function () {
-                    $scope.status = 'busy';
-                    refreshData();
-                }, function () {
-                    console.log('Error in create meeting response');
-                });
+        $scope.createEvent = function (status, timeDiff, tagId) {
+            if (status === 'free' && timeDiff > 30 && tagId) {
+                // Check localStorage for apikey
+                var apikey = window.localStorage.getItem('apikey');
+                var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                // Rest API communication -> create calendar event using startdatetime and enddatetime
+                // We need to substract 2 hours due to Outlook diff
+                // Make it 30 mins length from current time
+                Restangular.all('rooms/calendar/create').post({'apikey': apikey, 'start': moment().tz(timeZone).format('YYYY-MM-DDTHH:mm:ssZ'), 'end': moment().tz(timeZone).add(30, 'minutes').format('YYYY-MM-DDTHH:mm:ssZ')})
+                    .then(function () {
+                        $scope.status = 'busy';
+                        refreshData();
+                    }, function () {
+                        console.log('Error in create meeting response');
+                    });
+            }
+
         };
         // INSTANT MEETING -----------------------------------------------------------------
 

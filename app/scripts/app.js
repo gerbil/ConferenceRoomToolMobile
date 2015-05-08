@@ -17,7 +17,8 @@ angular.module('t2EventsApp', [
     'ngSanitize',
     'ngTouch',
     'restangular',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ngAside'
 ])
 
     .config(function ($routeProvider, RestangularProvider) {
@@ -36,10 +37,18 @@ angular.module('t2EventsApp', [
             });
 
         // BackEnd API endpoint
-        RestangularProvider.setBaseUrl('http://10.30.60.165:3000');
+        //RestangularProvider.setBaseUrl('http://10.30.60.165:3000');
+        RestangularProvider.setBaseUrl('http://128.199.46.235:11000');
 
         // Android scale workaround
-        document.body.style.zoom = 0.5;
+        function detectmob() {
+            if(window.innerWidth <= 1400) {
+                document.body.style.zoom = 0.5;
+            } else {
+                return false;
+            }
+        }
 
-    });
+        detectmob();
 
+    })

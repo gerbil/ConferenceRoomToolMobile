@@ -1,0 +1,92 @@
+.info {
+    outline: none !important;
+}
+
+    .info .head {
+        background: #0b141b;
+        color: #9c9d9e;
+        font-size: 2em;
+        font-weight: bold;
+        margin-bottom: 0;
+    }
+
+        .info .head .dateTime {
+            padding: 1em;
+        }
+
+    .info .menuz {
+        font-size: 1.5em;
+        background: #2e3336;
+        color: #f8f8f8;
+    }
+
+        .info .menuz ul {
+            display: inline-block;
+            list-style: none;
+            height: 3em;
+        }
+
+        .info .menuz ul li {
+            float: left;
+            border-right: 1px solid #0b141b;
+            padding: 1em 1em 1em 1.3em;
+            font-weight: bold;
+            width: 8em;
+            height: 4em;
+            position:relative;
+            outline: none !important;
+            text-align: center;
+        }
+
+        .info .menuz ul li.active:after {
+            content: '';
+            position: absolute;
+            width: 0px;
+            height: 0px;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-top: 40px solid #2e3336;
+            top: 3.2em;
+            left: 3em;
+        }
+
+    .info .list {
+        margin-top: 2em;
+        padding: 2em;
+        overflow-x: visible;
+        background: #1e2327;
+    }
+
+        .info .list table {
+            width: 100%;
+            font-size: 1.5em;
+            padding: 2em;
+        }
+
+        .info .list table tr {
+            width: 100%;
+            display: block;
+            margin-bottom: 0.5em;
+            background: #0b141b;
+            padding: 0.2em 0.6em 0.2em 0.6em;
+        }
+
+        .info .list table tr td.icon {
+            background: #2e3336;
+            padding: 1em;
+        }
+
+        .info .list table tr td.icon i.glyphicon {
+            top: 6px !important;
+            left: 3px !important;
+        }
+
+        .info .list table tr td.eventSubject {
+            padding-left: 1em;
+            width: 90%;
+        }
+
+        .info .list table tr td.eventTime {
+            padding: 0.2em 0.6em 0.2em 0.6em;
+            background: #1e2327;
+         }

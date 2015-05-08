@@ -1,6 +1,24 @@
-<div ng-controller="mainCtrl" class="container-fluid {{status}}" ng-click="openInfo()">
-
+<div ng-controller="mainCtrl" class="container-fluid {{status}} {{hidden}}">
+    <!--ng-click="openInfo()"-->
     <div class="center">
+        <div class="head">
+            <div class="col-md-11">
+                <div class="currentTime">{{currentTime}}</div>
+                <div class="location">{{roomName}}</div>
+            </div>
+            <div class="col-md-1 hamburger" ng-click="openMenu()"/>
+        </div>
+        <div class="meetingInfo">
+            <div class="statusText">{{statusText}}</div>
+        </div>
+        <div class="buttons {{status}}">
+            <div class="col-md-4 book" ng-click="createEvent(status, timeDiff, tagId)" ng-show="status === 'free'" ng-class="((timeDiff > 30) && tagId) ? 'active' : 'inactive'" stop-event>Book Room</div>
+            <!--ng-click="createEvent()"-->
+            <div class="col-md-4 availableTime">{{availableTimeButtonText}}</div>
+        </div>
+    </div>
+
+    <!--<div class="center">
         <div class="head">
             <div class="col-md-5 location">{{roomName}}</div>
             <div class="col-md-7 resources">
@@ -42,11 +60,14 @@
     </div>
 
     <div class="logOut" ng-click="logOut()" stop-event>
-        <!--<i class="glyphicon glyphicon-circle-arrow-left"/>-->
+        <i class="glyphicon glyphicon-circle-arrow-left"/>
     </div>
 
     <div class="nfcUser" ng-show="tagId">
         User logged in - {{tagId}}
-    </div>
+    </div>-->
+
+
+
 
 </div>
