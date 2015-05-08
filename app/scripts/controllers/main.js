@@ -20,7 +20,7 @@ angular.module('t2EventsApp')
                 templateUrl: 'views/menu.html',
                 placement: 'right',
                 size: 'lg',
-                status: 'free'
+                status: $scope.status
             });
         }
 
@@ -281,7 +281,7 @@ angular.module('t2EventsApp')
         // INSTANT MEETING +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Send a timestamp to create an instant meeting
         $scope.createEvent = function (status, timeDiff, tagId) {
-            if (status === 'free' && timeDiff > 30 && tagId) {
+            if (status === 'free' && timeDiff > 30 && !tagId) {
                 // Check localStorage for apikey
                 var apikey = window.localStorage.getItem('apikey');
                 var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
