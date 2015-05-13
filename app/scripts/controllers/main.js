@@ -17,7 +17,7 @@ angular.module('t2EventsApp')
         // Side menu feature
         $scope.openMenu = function (status) {
             $aside.open({
-                templateUrl: '../../views/' + status + 'Menu.html',
+                templateUrl: 'views/' + status + 'Menu.html',
                 placement: 'right',
                 size: 'lg',
                 status: status,
