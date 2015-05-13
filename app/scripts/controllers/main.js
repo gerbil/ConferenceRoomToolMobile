@@ -15,12 +15,13 @@ angular.module('t2EventsApp')
         $scope.hidden = 'hidden';
 
         // Side menu feature
-        $scope.openMenu= function (status) {
+        $scope.openMenu = function (status) {
             $aside.open({
-                templateUrl: '../../views/'+status+'Menu.html',
+                templateUrl: '../../views/' + status + 'Menu.html',
                 placement: 'right',
                 size: 'lg',
-                status: status
+                status: status,
+                controller: 'mainCtrl'
             });
         }
 
@@ -164,7 +165,6 @@ angular.module('t2EventsApp')
                         //$cordovaNativeAudio.loop('free');
                     }
                 });
-            // EVENTS FROM CURRENT TIMESTAMP ------------------------------------------------
 
             // FULL DAY EVENTS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             Restangular.all('rooms/calendar').getList({'apikey': apikey, 'startDateTime': today, 'endDateTime': tomorrow})
@@ -192,7 +192,7 @@ angular.module('t2EventsApp')
                         // Meeting will start in, else meeting will end in
                         if (currentTime > startTime) {
                             $scope.status = 'busy';
-                           // $scope.meetingWill = 'Ends in ' + moment.preciseDiff(currentTime, endTime);
+                            // $scope.meetingWill = 'Ends in ' + moment.preciseDiff(currentTime, endTime);
                         } else if (startTime > currentTime) {
                             $scope.status = 'free';
                             //$scope.meetingWill = 'Starts in ' + moment.preciseDiff(currentTime, startTime);
@@ -203,7 +203,6 @@ angular.module('t2EventsApp')
                         //$scope.timeDiff = 999;
                     }
                 });
-            // FULL DAY EVENTS ---------------------------------------------------------------
 
             // NFC LOGOUT +++++++++++++++++++++++++++++++++++++++++++++++++++
             // Check localStorage for auth nfc id
@@ -226,7 +225,7 @@ angular.module('t2EventsApp')
                     $scope.authTimeDiff = null;
                 }
             }
-            // NFC LOGOUT-------------------------------------------------------
+
         }
 
         // Auto start
@@ -266,7 +265,6 @@ angular.module('t2EventsApp')
                     });
             }
         };
-        // RESOURCES --------------------------------------------------------------------
 
 
         // To the Info screen
@@ -296,7 +294,21 @@ angular.module('t2EventsApp')
             }
 
         };
-        // INSTANT MEETING -----------------------------------------------------------------
+
+        // CANCEL MEETING +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        $scope.cancelEvent = function () {
+            // Check localStorage for apikey
+            var apikey = window.localStorage.getItem('apikey');
+            // Rest API communication -> cancel calendar event using id
+            Restangular.all('rooms/calendar/cancel').post({'apikey': apikey, 'id': $scope.nextEvent.Id})
+                .then(function () {
+                    $scope.status = 'free';
+                    refreshData();
+                }, function () {
+                    console.log('Error in cancel meeting id ' + id);
+                });
+            console.log();
+        };
 
         $scope.logOut = function () {
             window.localStorage.removeItem('apikey');
