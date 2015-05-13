@@ -41,14 +41,8 @@ angular.module('t2EventsApp', [
         RestangularProvider.setBaseUrl('http://128.199.46.235:11000');
 
         // Android scale workaround
-        function detectmob() {
-            if(window.innerWidth <= 1400) {
-                document.body.style.zoom = 0.5;
-            } else {
-                return false;
-            }
+        if (window.innerWidth <= 1400) {
+            document.body.style.zoom = 0.5;
         }
-
-        detectmob();
 
     })

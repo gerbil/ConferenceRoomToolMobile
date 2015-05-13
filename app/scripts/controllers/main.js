@@ -14,16 +14,15 @@ angular.module('t2EventsApp')
         // WO for screen flash before content fetched from backend
         $scope.hidden = 'hidden';
 
-        // Side menu
-        $scope.openMenu = function () {
+        // Side menu feature
+        $scope.openMenu= function (status) {
             $aside.open({
-                templateUrl: 'views/menu.html',
+                templateUrl: '../../views/'+status+'Menu.html',
                 placement: 'right',
                 size: 'lg',
-                status: $scope.status
+                status: status
             });
         }
-
 
         // NFC +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Because of the problem about the async-ness of the nfc plugin, we need to wait for it to be ready.
@@ -156,11 +155,10 @@ angular.module('t2EventsApp')
                         }
 
                     } else {
-                        $scope.status = 'free noMore';
+                        $scope.status = 'free';
                         $scope.statusText = 'Room available';
-                        $scope.meetingText = 'No more meetings today';
-                        $scope.meetingWill = '';
-                        $scope.timeDiff = -1;
+                        $scope.availableTimeButtonText = '';
+                        $scope.timeDiff = 999;
                         // LED light func free
                         //$cordovaNativeAudio.stop('busy');
                         //$cordovaNativeAudio.loop('free');
@@ -194,17 +192,15 @@ angular.module('t2EventsApp')
                         // Meeting will start in, else meeting will end in
                         if (currentTime > startTime) {
                             $scope.status = 'busy';
-                            $scope.meetingWill = 'Ends in ' + moment.preciseDiff(currentTime, endTime);
+                           // $scope.meetingWill = 'Ends in ' + moment.preciseDiff(currentTime, endTime);
                         } else if (startTime > currentTime) {
                             $scope.status = 'free';
-                            $scope.meetingWill = 'Starts in ' + moment.preciseDiff(currentTime, startTime);
+                            //$scope.meetingWill = 'Starts in ' + moment.preciseDiff(currentTime, startTime);
                         }
 
                     } else {
-                        $scope.status = 'free noMore';
-                        $scope.meetingText = 'No more meetings today';
-                        $scope.meetingWill = '';
-                        $scope.timeDiff = 999;
+                        $scope.status = 'free';
+                        //$scope.timeDiff = 999;
                     }
                 });
             // FULL DAY EVENTS ---------------------------------------------------------------
@@ -282,6 +278,8 @@ angular.module('t2EventsApp')
         // Send a timestamp to create an instant meeting
         $scope.createEvent = function (status, timeDiff, tagId) {
             if (status === 'free' && timeDiff > 30 && !tagId) {
+                // Hide element
+                $scope.status = 'busy';
                 // Check localStorage for apikey
                 var apikey = window.localStorage.getItem('apikey');
                 var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;

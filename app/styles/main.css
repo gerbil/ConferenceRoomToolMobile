@@ -103,57 +103,27 @@ body {
             background-position: center;
         }
 
-.statusText {
-    padding-top: 1.2em;
-    font-family: 'Tele2SlabWeb-Heavy', sans-serif;
-    font-size: 20em;
-    line-height: 0.8em;
+.meetingInfo {
+
 }
 
-.buttons {
-    padding-top: 26em;
-}
-
-    .book {
-        padding: 1.5em 1em 1.5em 1em;
-        font-family: 'Tele2SlabWeb-V2-Bold', sans-serif;
-        font-size: 2em;
-        text-align: center;
-        margin-right: 1em;
+    .statusText {
+        padding-top: 1em;
+        font-family: 'Tele2SlabWeb-Heavy', sans-serif;
+        font-size: 20em;
+        line-height: 0.8em;
     }
 
-        div.free div.active {
-            background-color: #ffffff;
-            color: #43ad2a;
-         }
-
-        div.free div.inactive {
-            background-color: #e2e2e0;
-            color: #43ad2a;
-        }
-
-    .availableTime {
-        padding: 1.5em 1em 1.5em 1em;
+    .next {
+        padding-top: 2em;
         font-family: 'Tele2SlabWeb-V2-Regular', sans-serif;
-        font-size: 2em;
-        text-align: center;
+        font-size: 3em;
     }
 
-    div.busy div.availableTime {
-          background-color: #fc8919;
-          color: #ffffff;
-     }
-
-    div.free div.availableTime {
-        background-color: #58b641;
-        color: #ffffff;
+    .subj {
+        font-family: 'Tele2SlabWeb-Bold', sans-serif;
+        font-size: 6em;
     }
-
-.border-box {
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-}
-
 
 .sideMenu {
     list-style: none;
@@ -165,18 +135,80 @@ body {
     }
 
     div.busy div.sideMenu  {
-        background: #f49a23;
+        background: #e57101;
+    }
+
+    .sideMenu div.title {
+        font-family: 'Tele2SlabWeb-V2-Regular', sans-serif;
+        font-size: 2em;
+        padding: 2em 0 0.5em 1.5em;
     }
 
     .sideMenu ul li {
-        font-family: 'Tele2SlabWeb-V2-Regular', sans-serif;
+        font-family: 'Tele2SlabWeb-Bold', sans-serif;
         padding: 2em;
-        border-bottom: 1px solid #fff;
         font-size: 2em;
         vertical-align: middle;
+        background: #fff;
+        width: 25em;
+        margin: 1em 0 0 1.5em;
+        text-align: center;
     }
+
+        div.busy .sideMenu ul li {
+            color: rgb(229, 113, 1);
+        }
+
+        div.free .sideMenu ul li {
+            color: rgb(53, 137, 56);
+        }
 
     .sideMenu ul li i {
        padding-right: 0.5em;
        top: 3px;
     }
+
+
+.buttons {
+    padding-top: 10em;
+}
+
+    .book {
+        padding: 1.5em 1em 1.5em 1em;
+        font-family: 'Tele2SlabWeb-V2-Regular', sans-serif;
+        font-size: 2em;
+        text-align: center;
+        margin-right: 1em;
+        float: right;
+    }
+
+    div.free div.active {
+        background-color: #ffffff;
+        color: #43ad2a;
+    }
+
+    div.free div.inactive {
+        background-color: #e2e2e0;
+        color: #43ad2a;
+    }
+
+    .availableTime {
+        margin-right: 1em;
+        padding: 1.5em 1em 1.5em 1em;
+        font-family: 'Tele2SlabWeb-V2-Regular', sans-serif;
+        font-size: 2em;
+        text-align: center;
+        float: right;
+    }
+
+        div.busy div.availableTime {
+            background-color: #fc8919;
+            color: #ffffff;
+            float: right;
+        }
+
+        div.free div.availableTime {
+            background-color: #58b641;
+            color: #ffffff;
+            float: right;
+        }
