@@ -1,0 +1,18 @@
+<div ng-controller="reportCtrl" class="container-fluid report">
+    <div class="center">
+        <div class="head">
+            <div class="col-md-11">
+                <div class="currentTime">{{currentTime}}</div>
+                <div class="location">{{roomName}}</div>
+            </div>
+            <div class="col-md-1 hamburger" ng-click="openMenu()"/>
+        </div>
+        <div class="reportInfo">
+            <div class="statusText">Here you can report broken equipment</div>
+        </div>
+        <div class="buttons">
+            <div class="col-md-4 book" ng-click="createEvent(status, timeDiff, tagId)" ng-show="status === 'free'" ng-class="((timeDiff > 30) && !tagId) ? 'active' : 'inactive'" stop-event>Book Room</div>
+            <div class="col-md-4 availableTime" ng-show="availableTimeButtonText !== ''">{{availableTimeButtonText}}</div>
+        </div>
+    </div>
+</div>

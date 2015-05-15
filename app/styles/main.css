@@ -174,13 +174,17 @@ body {
 }
 
     .book {
-        padding: 1.5em 1em 1.5em 1em;
-        font-family: 'Tele2SlabWeb-V2-Regular', sans-serif;
-        font-size: 2em;
+        padding: 1em 0em 1em 0em;
+        font-family: 'Tele2SlabWeb-Bold', sans-serif;
+        font-size: 3em;
         text-align: center;
         margin-right: 1em;
         float: right;
     }
+
+        div.noMore div.book {
+            margin-top: 3em;
+        }
 
     div.free div.active {
         background-color: #ffffff;
@@ -194,9 +198,9 @@ body {
 
     .availableTime {
         margin-right: 1em;
-        padding: 1.5em 1em 1.5em 1em;
-        font-family: 'Tele2SlabWeb-V2-Regular', sans-serif;
-        font-size: 2em;
+        padding: 1em 0em 1em 0em;
+        font-family: 'Tele2SlabWeb-Bold', sans-serif;
+        font-size: 3em;
         text-align: center;
         float: right;
     }

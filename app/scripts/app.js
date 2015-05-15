@@ -26,11 +26,23 @@ angular.module('t2EventsApp', [
             .when('/', {
                 templateUrl: 'views/login.html'
             })
-            .when('/info', {
-                templateUrl: 'views/info.html'
-            })
             .when('/main', {
                 templateUrl: 'views/main.html'
+            })
+            .when('/schedule', {
+                templateUrl: 'views/schedule.html'
+            })
+            .when('/extend', {
+                templateUrl: 'views/extend.html'
+            })
+            .when('/report', {
+                templateUrl: 'views/report.html'
+            })
+            .when('/admin', {
+                templateUrl: 'views/admin.html'
+            })
+            .when('/help', {
+                templateUrl: 'views/help.html'
             })
             .otherwise({
                 redirectTo: '/'

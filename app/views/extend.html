@@ -1,0 +1,14 @@
+<div ng-controller="extendCtrl" class="container-fluid extend">
+    <div class="center">
+        <div class="head">
+            <div class="col-md-11">
+                <div class="currentTime">{{currentTime}}</div>
+                <div class="location">{{roomName}}</div>
+            </div>
+            <div class="col-md-1 hamburger" ng-click="openMenu()"/>
+        </div>
+        <div class="reportInfo">
+            <div class="extendText">You're about to extend meeting from {{currentTime}} to {{extendTime}}.</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+.sideMenu.report {
+    background: #161b1f;
+}
+
+.sideMenu.report ul li {
+    font-family: 'Tele2SlabWeb-Bold', sans-serif;
+    padding: 2em;
+    font-size: 2em;
+    vertical-align: middle;
+    background: #fff;
+    width: 25em;
+    margin: 1em 0 0 1.5em;
+    text-align: center;
+    color: #161b1f;
+}
+
+.report {
+    color: #fff;
+}
