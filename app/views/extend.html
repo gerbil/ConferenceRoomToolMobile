@@ -3,12 +3,17 @@
         <div class="head">
             <div class="col-md-11">
                 <div class="currentTime">{{currentTime}}</div>
-                <div class="location">{{roomName}}</div>
+                <div class="location">Extend Time</div>
             </div>
             <div class="col-md-1 hamburger" ng-click="openMenu()"/>
         </div>
-        <div class="reportInfo">
-            <div class="extendText">You're about to extend meeting from {{currentTime}} to {{extendTime}}.</div>
+        <div class="extendInfo">
+            <div class="extendText">You're about to extend<br/><span class="eventSubject">current meeting</span><br/>from <span class="eventTime">{{currentTime}} to
+                {{extendTime}}</span></div>
+        </div>
+        <div class="buttonsExtend">
+            <div class="col-md-4 ok" ng-click="extendEvent()" stop-event>Looks Good</div>
+            <div class="col-md-4 back">Bring Me Back</div>
         </div>
     </div>
 </div>

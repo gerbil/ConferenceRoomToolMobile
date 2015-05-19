@@ -16,4 +16,41 @@
 
 .extend {
     color: #fff;
+    background: #009ee2;
+    height: 100%;
 }
+
+    .extend .location {
+        font-family: 'Tele2SlabWeb-V2-Regular', sans-serif;
+    }
+
+.extendText {
+    padding-top: 1em;
+    font-family: 'Tele2SlabWeb-V2-Regular', sans-serif;
+    font-size: 10em;
+    line-height: 1.1em;
+}
+
+    .extendText .eventSubject, .extendText .eventTime {
+        font-family: 'Tele2SlabWeb-Bold', sans-serif;
+    }
+
+.buttonsExtend {
+    margin-top: 11em;
+    font-family: 'Tele2SlabWeb-Bold', sans-serif;
+    font-size: 3em;
+    text-align: center;
+}
+
+    .buttonsExtend .ok {
+        padding: 1em 0em 1em 0em;
+        background-color: #ffffff;
+        color: #009ee2;
+        margin-right: 1em;
+    }
+
+    .buttonsExtend .back {
+        padding: 1em 0em 1em 0em;
+        background-color: #19a7e1;
+        color: #fff;
+    }

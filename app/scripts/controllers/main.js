@@ -26,7 +26,6 @@ angular.module('t2EventsApp')
 
             // We need current timestamp for display
             $rootScope.currentTime = moment().tz(timeZone).format('HH:mm');
-            //$scope.currentTime = moment().tz(timeZone).format('HH:mm');
 
             // Create today date string for backend query
             // Minus 2 hours based on Outlook API
@@ -47,10 +46,11 @@ angular.module('t2EventsApp')
                     // Fetch only room name
                     $rootScope.roomName = results[0];
                     // Fetch only one scheduled event
-                    $scope.nextEvent = results[1].value[0];
+                    $rootScope.nextEvent = results[1].value[0];
+                    $rootScope.futureEvent = results[1].value[1];
                     // If there are no events today -> skip, otherwise change timezone for LV or SWE, also change meetingText
                     //TODO: auto timezone change
-                    if ($scope.nextEvent) {
+                    if ($rootScope.nextEvent) {
                         // LV settings for a timezone
                         $scope.nextEvent.Start = moment($scope.nextEvent.Start).format('HH:mm');
                         $scope.nextEvent.End = moment($scope.nextEvent.End).format('HH:mm');
@@ -81,7 +81,7 @@ angular.module('t2EventsApp')
                             $scope.meetingWill = 'Starts in ' + moment.preciseDiff(currentTime, startTime);
                             $scope.availableTimeButtonText = 'Next meeting at ' + $scope.nextEvent.Start;
                             // Time diff betweeb start time and current time for internal use
-                            $scope.timeDiff = startTime.diff(currentTime.add(1, 'hour'), 'minutes');
+                            $scope.timeDiff = startTime.diff(currentTime, 'minutes');
                         } else if (startTime === currentTime) {
                             $scope.meetingWill = 'Ends now';
                         }
@@ -230,7 +230,6 @@ angular.module('t2EventsApp')
                 var apikey = window.localStorage.getItem('apikey');
                 var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
                 // Rest API communication -> create calendar event using startdatetime and enddatetime
-                // We need to substract 2 hours due to Outlook diff
                 // Make it 30 mins length from current time
                 Restangular.all('rooms/calendar/create').post({'apikey': apikey, 'start': moment().tz(timeZone).format('YYYY-MM-DDTHH:mm:ssZ'), 'end': moment().tz(timeZone).add(30, 'minutes').format('YYYY-MM-DDTHH:mm:ssZ')})
                     .then(function () {
