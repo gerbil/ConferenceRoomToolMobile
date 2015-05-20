@@ -1,7 +1,7 @@
 <div class="sideMenu">
     <div class="title">Meeting administration</div>
     <ul>
-        <li ng-click="extend()">Extend with 30 mins</li>
+        <li ng-click="extend()" ng-show="extendedEventStart">Extend with 30 mins</li>
         <li ng-click="cancelEvent()">End meeting</li>
     </ul>
 

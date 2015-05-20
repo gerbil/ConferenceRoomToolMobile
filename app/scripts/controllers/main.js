@@ -51,18 +51,15 @@ angular.module('t2EventsApp')
                     // If there are no events today -> skip, otherwise change timezone for LV or SWE, also change meetingText
                     //TODO: auto timezone change
                     if ($rootScope.nextEvent) {
-                        // LV settings for a timezone
                         $scope.nextEvent.Start = moment($scope.nextEvent.Start).format('HH:mm');
                         $scope.nextEvent.End = moment($scope.nextEvent.End).format('HH:mm');
-                        $scope.nextEvent.time = $scope.nextEvent.Start + ' - ' + $scope.nextEvent.End;
                         $scope.meetingText = ($scope.nextEvent.Start) > $scope.currentTime ? 'Next meeting' : 'Current meeting';
 
                         var currentTime = moment($scope.currentTime, 'HH:mm');
                         var startTime = moment($scope.nextEvent.Start, 'HH:mm');
                         var endTime = moment($scope.nextEvent.End, 'HH:mm');
 
-                        // Meeting will start in, else meeting will end in
-                        if (currentTime >= startTime) {
+                        if (currentTime >= startTime) { // BUSY PART
                             // LED light func busy
                             //$cordovaNativeAudio.stop('free');
                             //$cordovaNativeAudio.loop('busy');
@@ -70,8 +67,27 @@ angular.module('t2EventsApp')
                             $scope.status = 'busy';
                             $scope.statusText = 'Room booked';
                             $scope.meetingWill = 'Ends in ' + moment.preciseDiff(currentTime, endTime);
-                            $scope.availableTimeButtonText = 'Available at ' + $scope.nextEvent.End;
-                        } else if (startTime > currentTime) {
+                            $scope.availableTimeButtonText = 'Ends in ' + $scope.nextEvent.End;
+
+                            // Extend meeting feature [shown only if posible]
+                            var freeTimeGap = 0;
+                            // If future meeting present we should check gap
+                            if ($rootScope.futureEvent) {
+                                // Set moment like future event start time
+                                var futureEventStart = moment($rootScope.futureEvent.Start, 'YYYY-MM-DDTHH:mm:ssZ');
+                                // Check for a gap between current meeting end time and next meeting start time
+                                freeTimeGap = futureEventStart.diff(endTime, 'minutes');
+                            }
+                            // If it's possible to extend current meeting -> set time
+                            if (freeTimeGap >= 30 || !$rootScope.futureEvent) {
+                                $rootScope.extendedEventStart = endTime;
+                                $rootScope.extendedEventStartTime = $scope.nextEvent.End;
+
+                                $rootScope.extendedEventEnd = moment(endTime, 'HH:mm').add(30, 'minutes');
+                                $rootScope.extendedEventEndTime = $rootScope.extendedEventEnd.format('HH:mm');
+                            }
+
+                        } else if (startTime > currentTime) { // FREE PART
                             // LED light func free
                             //$cordovaNativeAudio.stop('busy');
                             //$cordovaNativeAudio.loop('free');
@@ -86,7 +102,7 @@ angular.module('t2EventsApp')
                             $scope.meetingWill = 'Ends now';
                         }
 
-                    } else {
+                    } else { // FREE PART
                         $scope.status = 'free noMore';
                         $scope.statusText = 'Room available';
                         $scope.availableTimeButtonText = '';
@@ -96,6 +112,8 @@ angular.module('t2EventsApp')
                         //$cordovaNativeAudio.stop('busy');
                         //$cordovaNativeAudio.loop('free');
                     }
+
+
                 });
 
             // NFC LOGOUT +++++++++++++++++++++++++++++++++++++++++++++++++++
