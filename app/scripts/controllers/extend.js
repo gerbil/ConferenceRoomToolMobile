@@ -28,10 +28,10 @@ angular.module('t2EventsApp')
         };
 
         $scope.extendEvent = function () {
+            $('.ok').hide();
 
             // Check localStorage for apikey
             var apikey = window.localStorage.getItem('apikey');
-
 
             // Rest API communication
             Restangular.all('rooms/calendar/create').post({'apikey': apikey, 'start': $rootScope.extendedEventStart.format('YYYY-MM-DDTHH:mm:ssZ'), 'end': $rootScope.extendedEventEnd.format('YYYY-MM-DDTHH:mm:ssZ')})

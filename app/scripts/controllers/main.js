@@ -70,16 +70,15 @@ angular.module('t2EventsApp')
                             $scope.availableTimeButtonText = 'Ends in ' + $scope.nextEvent.End;
 
                             // Extend meeting feature [shown only if posible]
-                            var freeTimeGap = 0;
                             // If future meeting present we should check gap
                             if ($rootScope.futureEvent) {
                                 // Set moment like future event start time
                                 var futureEventStart = moment($rootScope.futureEvent.Start, 'YYYY-MM-DDTHH:mm:ssZ');
                                 // Check for a gap between current meeting end time and next meeting start time
-                                freeTimeGap = futureEventStart.diff(endTime, 'minutes');
+                                $scope.freeTimeGap = futureEventStart.diff(endTime, 'minutes');
                             }
                             // If it's possible to extend current meeting -> set time
-                            if (freeTimeGap >= 30 || !$rootScope.futureEvent) {
+                            if ($scope.freeTimeGap >= 30 || !$rootScope.futureEvent) {
                                 $rootScope.extendedEventStart = endTime;
                                 $rootScope.extendedEventStartTime = $scope.nextEvent.End;
 
