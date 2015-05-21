@@ -212,30 +212,6 @@ angular.module('t2EventsApp')
         // NFC ---------------------------------------------------------------------------
 
 
-        // RESOURCES +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        // Retrieve resource statuses from local storage
-        $scope.beamer = localStorage.getItem('beamer') ? localStorage.getItem('beamer') : 'working';
-        $scope.whiteboard = localStorage.getItem('whiteboard') ? localStorage.getItem('whiteboard') : 'working';
-        $scope.light = localStorage.getItem('light') ? localStorage.getItem('light') : 'working';
-
-        $scope.setStatus = function (resource, status) {
-            $scope[resource] = status;
-            // Put status into storage
-            localStorage.setItem(resource, status);
-
-            // Send email if broken
-            if (status === 'broken') {
-                var post = {'room': $scope.roomName, 'resource': resource, 'user': $scope.tagId};
-                // Rest API communication -> send email to ServiceDesk with room name and resource info
-                Restangular.all('broken').post(post)
-                    .then(function () {
-                        //console.info(results);
-                    });
-            }
-        };
-        // RESOURCES END
-
-
         // INSTANT MEETING +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Send a timestamp to create an instant meeting
         $scope.createEvent = function (status, timeDiff, tagId) {

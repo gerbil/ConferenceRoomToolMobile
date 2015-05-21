@@ -1,5 +1,5 @@
 .sideMenu.report {
-    background: #161b1f;
+    background: #000000;
 }
 
 .sideMenu.report ul li {
@@ -7,13 +7,49 @@
     padding: 2em;
     font-size: 2em;
     vertical-align: middle;
-    background: #fff;
+    background: #FFFFFF;
     width: 25em;
     margin: 1em 0 0 1.5em;
     text-align: center;
-    color: #161b1f;
+    color: #000000;
 }
 
 .report {
-    color: #fff;
+    color: #FFFFFF;
+    background: #e1061f;
+    height: 100%;
 }
+
+.report span.yellow {
+    color: #fdeb01;
+}
+
+.reportInfo {
+    margin-top: 1.2em;
+    font-size: 10em;
+    line-height: 0.9em;
+}
+
+    .reportInfo .reportEquipment {
+        margin-top: 1em;
+    }
+
+    .reportInfo .reportEquipment div {
+        color: #FFFFFF;
+        font-size: 1em;
+        margin-bottom: 0.3em;
+    }
+
+        .reportInfo .reportEquipment div i {
+            vertical-align: middle;
+            color: #fdeb01;
+            width: 1.4em;
+        }
+
+    .reportInfo .reportEquipment div.broken {
+        color: #000000;
+    }
+
+    .reportInfo .reportEquipment div.broken i {
+        color: #000000;
+    }

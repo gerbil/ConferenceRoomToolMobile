@@ -49,7 +49,7 @@ angular.module('t2EventsApp', [
             });
 
         // BackEnd API endpoint
-        //RestangularProvider.setBaseUrl('http://10.30.60.165:3000');
+        // RestangularProvider.setBaseUrl('http://10.30.60.165:3000');
         RestangularProvider.setBaseUrl('http://128.199.46.235:11000');
 
         // Android scale workaround

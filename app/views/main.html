@@ -13,7 +13,7 @@
         <div class="meetingInfo">
             <div class="statusText">{{statusText}}</div>
             <div class="next">{{meetingText}}</div>
-            <div class="subj">{{nextEvent.Subject | limitTo: 42}}</div>
+            <div class="subj">{{nextEvent.Subject | limitTo: 40}}</div>
         </div>
         <div class="buttons {{status}}">
             <div class="col-md-4 book" ng-click="createEvent(status, timeDiff, tagId)" ng-show="status === 'free' || status === 'free noMore'" ng-class="((timeDiff > 30) && !tagId) ? 'active' : 'inactive'"
