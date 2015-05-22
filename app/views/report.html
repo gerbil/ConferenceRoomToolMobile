@@ -8,18 +8,30 @@
             <div class="col-md-1 hamburger" ng-click="openMenu()"/>
         </div>
         <div class="reportInfo">
-            <div><span class="yellow">Please choose</span><br/>broken or missing<br/>equipment</div>
+            <div>Please report<br/><span class="yellow">broken or missing</span><br/>equipment</div>
             <div class="reportEquipment">
-                <div class="col-md-6 {{video}}" ng-click="report('video')" stop-event><i class="glyphicon glyphicon-facetime-video"/>Video</div>
-                <div class="col-md-6 {{sound}}" ng-click="report('sound')" stop-event><i class="glyphicon glyphicon-volume-down"/>Sound</div>
-                <div class="col-md-6 {{light}}" ng-click="report('light')" stop-event><i class="glyphicon glyphicon-lamp"/>Lights</div>
-                <div class="col-md-6 {{cleanup}}" ng-click="report('cleanup')" stop-event><i class="glyphicon glyphicon-trash"/>Cleanup</div>
-                <div class="col-md-6 {{board}}" ng-click="report('board')" stop-event><i class="glyphicon glyphicon-blackboard"/>Board</div>
-                <div class="col-md-6 {{other}}" ng-click="report('other')" stop-event><i class="glyphicon glyphicon-random"/>Other</div>
+                <div class="row">
+                    <div class="col-md-6 {{video}}" ng-click="report('video')" stop-event><i class="glyphicon glyphicon-facetime-video"/></div>
+                    <div class="col-md-6 {{sound}}" ng-click="report('sound')" stop-event><i class="glyphicon glyphicon-volume-down"/></div>
+                    <div class="col-md-6 {{light}}" ng-click="report('light')" stop-event><i class="glyphicon glyphicon-lamp"/></div>
+                    <div class="col-md-6 {{cleanup}}" ng-click="report('cleanup')" stop-event><i class="glyphicon glyphicon-trash"/></div>
+                    <div class="col-md-6 {{board}}" ng-click="report('board')" stop-event><i class="glyphicon glyphicon-blackboard"/></div>
+                    <div class="col-md-6 {{wifi}}" ng-click="report('wifi')" stop-event><i class="fa fa-wifi"/></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 {{phone}}" ng-click="report('phone')" stop-event><i class="glyphicon glyphicon-earphone"/></div>
+                    <div class="col-md-6 {{monitor}}" ng-click="report('monitor')" stop-event><i class="fa fa-desktop"/></div>
+                    <div class="col-md-6 {{printer}}" ng-click="report('printer')" stop-event><i class="glyphicon glyphicon-print"/></div>
+                    <div class="col-md-6 {{bug}}" ng-click="report('bug')" stop-event><i class="ionicons ion-bug"/></div>
+                    <div class="col-md-6 {{officestuff}}" ng-click="report('officestuff')" stop-event><i class="ionicons ion-paperclip"/></div>
+                    <div class="col-md-6 {{plug}}" ng-click="report('plug')" stop-event><i class="mega-octicon octicon-plug"/></div>
+                </div>
             </div>
         </div>
         <div class="buttons">
-            <div class="col-md-4 book" ng-click="createEvent(status, timeDiff, tagId)" ng-show="status === 'free'" ng-class="((timeDiff > 30) && !tagId) ? 'active' : 'inactive'" stop-event>Book Room</div>
+            <div class="col-md-4 book" ng-click="createEvent(status, timeDiff, tagId)" ng-show="status === 'free'" ng-class="((timeDiff > 30) && !tagId) ? 'active' : 'inactive'" stop-event>Book
+                Room
+            </div>
             <div class="col-md-4 availableTime" ng-show="availableTimeButtonText !== ''">{{availableTimeButtonText}}</div>
         </div>
     </div>

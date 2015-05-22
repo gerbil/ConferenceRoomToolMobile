@@ -9,7 +9,7 @@
  */
 angular.module('t2EventsApp')
 
-    .controller('adminCtrl', function ($scope, $rootScope, Restangular, $interval, $location, $cordovaNfc, $aside, $timeout) {
+    .controller('adminCtrl', function ($scope, $rootScope, Restangular, $interval, $location, $cordovaNfc, $aside) {
 
         $scope.openMenu = function () {
             $aside.open({
@@ -18,7 +18,7 @@ angular.module('t2EventsApp')
                 size: 'lg',
                 controller: 'adminCtrl'
             });
-        }
+        };
 
     }
 

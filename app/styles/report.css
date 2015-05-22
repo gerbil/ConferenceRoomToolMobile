@@ -1,5 +1,5 @@
 .sideMenu.report {
-    background: #000000;
+    background: #e1061f;
 }
 
 .sideMenu.report ul li {
@@ -11,10 +11,11 @@
     width: 25em;
     margin: 1em 0 0 1.5em;
     text-align: center;
-    color: #000000;
+    color: #e1061f;
 }
 
 .report {
+    font-family: 'Tele2SlabWeb-V2-Regular', sans-serif;
     color: #FFFFFF;
     background: #e1061f;
     height: 100%;
@@ -25,7 +26,7 @@
 }
 
 .reportInfo {
-    margin-top: 1.2em;
+    margin-top: 1em;
     font-size: 10em;
     line-height: 0.9em;
 }
@@ -34,22 +35,38 @@
         margin-top: 1em;
     }
 
-    .reportInfo .reportEquipment div {
-        color: #FFFFFF;
-        font-size: 1em;
-        margin-bottom: 0.3em;
+    .reportInfo .reportEquipment .row {
+        margin-bottom: 0.02em;
     }
 
-        .reportInfo .reportEquipment div i {
-            vertical-align: middle;
-            color: #fdeb01;
-            width: 1.4em;
+
+        .reportInfo .reportEquipment .row div {
+            background: #710310;
+            padding: 0.5em;
+            width: 2em;
+            margin-right: 0.02em;
         }
 
-    .reportInfo .reportEquipment div.broken {
-        color: #000000;
-    }
+            .reportInfo .reportEquipment div i {
+                vertical-align: middle;
+                color: #ff0623;
+                width: 1.2em;
+            }
 
-    .reportInfo .reportEquipment div.broken i {
-        color: #000000;
-    }
+            .reportInfo .reportEquipment div i.fa {
+                margin-left: -0.1em;
+            }
+
+            .reportInfo .reportEquipment div i.mega-octicon {
+                font-size: inherit;
+                margin-left: 0.1em;
+            }
+
+            .reportInfo .reportEquipment div i.ion-paperclip {
+                font-size: inherit;
+                margin-left: 0.3em;
+            }
+
+        .reportInfo .reportEquipment .row div.broken i {
+            color: #49030b;
+        }

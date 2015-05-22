@@ -16,7 +16,7 @@
             <div class="subj">{{nextEvent.Subject | limitTo: 40}}</div>
         </div>
         <div class="buttons {{status}}">
-            <div class="col-md-4 book" ng-click="createEvent(status, timeDiff, tagId)" ng-show="status === 'free' || status === 'free noMore'" ng-class="((timeDiff > 30) && !tagId) ? 'active' : 'inactive'"
+            <div class="col-md-4 book" ng-click="createEvent(status, timeDiff, tagId)" ng-show="(status === 'free' || status === 'free noMore') && timeDiff > 30" ng-class="((timeDiff > 30) && !tagId) ? 'active' : 'inactive'"
                  stop-event>Book Room</div>
             <div class="col-md-4 availableTime" ng-show="availableTimeButtonText !== ''">{{availableTimeButtonText}}</div>
         </div>

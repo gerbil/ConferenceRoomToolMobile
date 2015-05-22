@@ -112,7 +112,6 @@ angular.module('t2EventsApp')
                         //$cordovaNativeAudio.loop('free');
                     }
 
-
                 });
 
             // NFC LOGOUT +++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -219,6 +218,8 @@ angular.module('t2EventsApp')
                 // Hide element
                 $scope.status = 'busy';
                 $scope.statusText = 'Room booked';
+                $scope.statusText = 'Current meeting';
+                $scope.nextEvent.Subject = 'Booked on screen';
                 // Check localStorage for apikey
                 var apikey = window.localStorage.getItem('apikey');
                 var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -267,7 +268,7 @@ angular.module('t2EventsApp')
 
         var closeMenu = function () {
             $timeout(function () {
-                $('.modal').click()
+                $('.modal').click();
             }, 10);
         };
 
@@ -317,7 +318,6 @@ angular.module('t2EventsApp')
         // WO for screen flash before content fetched from backend
         $scope.hidden = 'hidden';
 
-
     }
 )
 
@@ -331,4 +331,4 @@ angular.module('t2EventsApp')
                 });
             }
         };
-    })
+    });

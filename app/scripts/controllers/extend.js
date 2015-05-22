@@ -13,7 +13,7 @@ angular.module('t2EventsApp')
 
         $scope.main = function () {
             $timeout(function () {
-                $('.modal').click()
+                $('.modal').click();
             }, 10);
             $location.path('main');
         };

@@ -57,4 +57,4 @@ angular.module('t2EventsApp', [
             document.body.style.zoom = 0.5;
         }
 
-    })
+    });
