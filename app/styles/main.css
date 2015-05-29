@@ -32,8 +32,8 @@
   Allow angular.js to be loaded in body, hiding cloaked elements until
   templates compile.  The !important is important given that there may be
   other selectors that are more specific or come later and might alter display.
- */
-.hidden {
+*/
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .hidden {
     display: none !important;
 }
 
@@ -63,8 +63,9 @@ body {
     background: #161b1f;
     font-family: 'Tele2SlabWeb-Heavy', sans-serif;
     color: #ffffff;
-    overflow-x: hidden;
+    overflow: hidden;
     height: 1536px;
+    width: 2048px;
 }
 
     .busy {
@@ -167,6 +168,10 @@ body {
        padding-right: 0.5em;
        top: 3px;
     }
+
+        .mainBusy ul li.mainBusyExtend.inactive {
+            background: #e2e2e0;
+        }
 
 
 .buttons {

@@ -21,7 +21,13 @@ angular.module('t2EventsApp', [
     'ngAside'
 ])
 
-    .config(function ($routeProvider, RestangularProvider) {
+    .config(function ($locationProvider, $routeProvider, RestangularProvider) {
+
+        /*$locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        });*/
+
         $routeProvider
             .when('/', {
                 templateUrl: 'views/login.html'
@@ -38,8 +44,11 @@ angular.module('t2EventsApp', [
             .when('/report', {
                 templateUrl: 'views/report.html'
             })
+            .when('/admin/login', {
+                templateUrl: 'views/admin/login.html'
+            })
             .when('/admin', {
-                templateUrl: 'views/admin.html'
+                templateUrl: 'views/admin/'
             })
             .when('/help', {
                 templateUrl: 'views/help.html'

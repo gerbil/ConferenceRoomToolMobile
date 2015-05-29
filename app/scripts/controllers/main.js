@@ -213,25 +213,24 @@ angular.module('t2EventsApp')
 
         // INSTANT MEETING +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Send a timestamp to create an instant meeting
-        $scope.createEvent = function (status, timeDiff, tagId) {
-            if ((status === 'free' || status === 'free noMore') && timeDiff > 30 && !tagId) {
-                // Hide element
-                $scope.status = 'busy';
-                $scope.statusText = 'Room booked';
-                $scope.statusText = 'Current meeting';
-                $scope.nextEvent.Subject = 'Booked on screen';
-                // Check localStorage for apikey
-                var apikey = window.localStorage.getItem('apikey');
-                var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                // Rest API communication -> create calendar event using startdatetime and enddatetime
-                // Make it 30 mins length from current time
-                Restangular.all('rooms/calendar/create').post({'apikey': apikey, 'start': moment().tz(timeZone).format('YYYY-MM-DDTHH:mm:ssZ'), 'end': moment().tz(timeZone).add(30, 'minutes').format('YYYY-MM-DDTHH:mm:ssZ')})
-                    .then(function () {
-                        refreshData();
-                    }, function () {
-                        console.log('Error in create meeting response');
-                    });
-            }
+        $scope.createEvent = function () {
+            // Hide element
+            $scope.status = 'busy';
+            $scope.statusText = 'Room booked';
+            $scope.statusText = 'Current meeting';
+            $scope.nextEvent = {};
+            $scope.nextEvent.Subject = 'Booked on screen';
+            // Check localStorage for apikey
+            var apikey = window.localStorage.getItem('apikey');
+            var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            // Rest API communication -> create calendar event using startdatetime and enddatetime
+            // Make it 30 mins length from current time
+            Restangular.all('rooms/calendar/create').post({'apikey': apikey, 'start': moment().tz(timeZone).format('YYYY-MM-DDTHH:mm:ssZ'), 'end': moment().tz(timeZone).add(30, 'minutes').format('YYYY-MM-DDTHH:mm:ssZ')})
+                .then(function () {
+                    refreshData();
+                }, function () {
+                    console.log('Error in create meeting response');
+                });
         };
         // INSTANT MEETING END
 
@@ -253,7 +252,7 @@ angular.module('t2EventsApp')
         // CANCEL MEETING END
 
         // Side menu feature
-        $scope.openMenu = function (status) {
+        $scope.openMenuMain = function (status) {
             if (status === 'free noMore') {
                 status = 'free';
             }
@@ -266,47 +265,24 @@ angular.module('t2EventsApp')
             });
         };
 
+        $rootScope.openMenuOther = function (screen) {
+            $aside.open({
+                templateUrl: 'views/menu/' + screen + '.html',
+                placement: 'right',
+                size: 'lg',
+                controller: screen + 'Ctrl'
+            });
+        };
+
         var closeMenu = function () {
             $timeout(function () {
                 $('.modal').click();
             }, 10);
         };
 
-
-        // To the main screen
-        $rootScope.main = function () {
+        $rootScope.changeScreen = function (screen) {
             closeMenu();
-            $location.path('main');
-        };
-
-        // To the schedule screen
-        $rootScope.schedule = function () {
-            closeMenu();
-            $location.path('schedule');
-        };
-
-        // Report broken equipment
-        $rootScope.report = function () {
-            closeMenu();
-            $location.path('report');
-        };
-
-        // Help
-        $rootScope.help = function () {
-            closeMenu();
-            $location.path('help');
-        };
-
-        // Login
-        $rootScope.login = function () {
-            closeMenu();
-            $location.path('admin');
-        };
-
-        // Extend
-        $rootScope.extend = function () {
-            closeMenu();
-            $location.path('extend');
+            $location.path(screen);
         };
 
         // Logout

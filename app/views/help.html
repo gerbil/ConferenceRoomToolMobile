@@ -5,10 +5,24 @@
                 <div class="currentTime">{{currentTime}}</div>
                 <div class="location">{{roomName}}</div>
             </div>
-            <div class="col-md-1 hamburger" ng-click="openMenu()"/>
+            <div class="col-md-1 hamburger" ng-click="openMenuOther('help')"/>
         </div>
         <div class="helpInfo">
-            <div class="helpText">Help page to describe this tool</div>
+            <div>Please use a form<br/>to report<br/><span class="black">issue, question or bug</span></div>
+            <div class="helpReport">
+                <form name="helpForm" novalidate>
+                    <fieldset class="clearfix">
+                        <p>
+                            <span class="glyphicon glyphicon-question-sign"></span>
+                            <textarea type="text" name="request" ng-model="request" autocomplete="off"></textarea>
+                        </p>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="buttonsHelp">
+            <div class="col-md-6 send" ng-click="sendHelpdesk()" stop-event>Send</div>
+            <div class="col-md-6 back" ng-click="main()" stop-event>Bring Me Back</div>
         </div>
     </div>
 </div>

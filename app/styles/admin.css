@@ -17,3 +17,80 @@
 .admin {
     color: #fff;
 }
+
+.loginhead .hamburger {
+    float: right;
+}
+
+/* ADMIN LOGIN *****************************************************************/
+.center-wrapper-admin {
+    position: absolute;
+    left: 20%;
+    top: 20%;
+    width: 100%;
+    height: 100%;
+}
+
+#admin {
+
+}
+
+    #admin > p {
+        text-align: center;
+    }
+
+    #admin p.logo {
+        color: #e0e0de;
+        font-size: 10em;
+        margin-bottom: 0.5em;
+        margin-left: -2em;
+    }
+
+    #admin form span {
+        margin-top: -1px;
+        margin-left: 1em;
+        background-color: #363b41;
+        display: block;
+        float: left;
+        height: 4em;
+        line-height: 4em;
+        text-align: center;
+        width: 10%;
+        font-size: 4em;
+        color: #646769;
+    }
+
+    #admin form input {
+        width: 70%;
+        height: 4em;
+        font-size: 4em;
+        line-height: 4em;
+        padding-left: 1.5em;
+        outline: none !important;
+    }
+
+    #admin form input[type="text"], #admin input[type="password"] {
+        background-color: #3b4148;
+        color: #B5B7BA;
+        margin-bottom: 0.1em;
+        padding: 0 1em 0 1em;
+    }
+
+    #admin form input[type="submit"] {
+        margin-left: 1em;
+        padding: 0;
+        width: 80%;
+        background-color: #e4007d;
+        color: #e0e0de;
+        margin-top: 0.2em;
+        text-transform: uppercase;
+        border: 0 none;
+    }
+
+    #admin form input[type="submit"]:hover {
+        background-color: #d44179;
+    }
+
+    #admin input.ng-invalid {
+        border-right: 2px solid red !important;
+    }

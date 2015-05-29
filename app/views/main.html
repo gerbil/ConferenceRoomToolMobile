@@ -8,15 +8,15 @@
                 <div class="currentTime">{{currentTime}}</div>
                 <div class="location">{{roomName}}</div>
             </div>
-            <div class="col-md-1 hamburger" ng-click="openMenu(status)"/>
+            <div class="col-md-1 hamburger" ng-click="openMenuMain(status)"/>
         </div>
         <div class="meetingInfo">
             <div class="statusText">{{statusText}}</div>
             <div class="next">{{meetingText}}</div>
-            <div class="subj">{{nextEvent.Subject | limitTo: 40}}</div>
+            <div class="subj">{{nextEvent.Subject | limitTo: 38}}</div>
         </div>
         <div class="buttons {{status}}">
-            <div class="col-md-4 book" ng-click="createEvent(status, timeDiff, tagId)" ng-show="(status === 'free' || status === 'free noMore') && timeDiff > 30" ng-class="((timeDiff > 30) && !tagId) ? 'active' : 'inactive'"
+            <div class="col-md-4 book" ng-click="(status === 'free' || status === 'free noMore') && (timeDiff > 30 && !tagId) && createEvent()" ng-show="(status === 'free' || status === 'free noMore') && timeDiff > 30" ng-class="((timeDiff > 30) && !tagId) ? 'active' : 'inactive'"
                  stop-event>Book Room</div>
             <div class="col-md-4 availableTime" ng-show="availableTimeButtonText !== ''">{{availableTimeButtonText}}</div>
         </div>

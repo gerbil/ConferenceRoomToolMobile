@@ -1,76 +1,58 @@
-/* LOGIN *****************************************************************/
-.outer {
-    display: table;
+.center-wrapper {
     position: absolute;
-    height: 100%;
+    left: 7.5%;
+    top: 12.5%;
     width: 100%;
+    height: 100%;
 }
-
-.container {
-    color: #B5B7BA;
-    display: table-cell;
-    vertical-align: middle;
-}
-
 
 #login {
-    width: 80%;
-    border: 0 none;
-    margin-left: auto;
-    margin-right: auto;
+    width: 2048px;
+    height: 1536px;
 }
 
     #login p.logo {
-        /*background: url("/background/logo.png") 100% no-repeat;*/
         color: #e0e0de;
-        font-size: 4em;
-        font-weight: 700;
-        text-transform: uppercase;
-        margin-bottom: 1em;
-        width: 80%;
-        height: 1em;
-        margin-right: auto;
-        margin-left: auto;
+        font-size: 10em;
+        margin-bottom: 0.5em;
+        margin-left: -2em;
     }
 
     #login form span {
         margin-top: -1px;
-        margin-left: 4em;
+        margin-left: 1em;
         background-color: #363b41;
         display: block;
         float: left;
-        height: 2em;
-        line-height: 2em;
+        height: 4em;
+        line-height: 4em;
         text-align: center;
         width: 10%;
-        font-size: 2em;
+        font-size: 4em;
         color: #646769;
     }
 
     #login form input {
-        width: 60%;
-        height: 2em;
-        border: 0px none;
-        border-radius: 0px;
-        font-size: 2em;
-        line-height: 2em;
-        padding: 0;
-        outline: none !important
+        width: 70%;
+        height: 4em;
+        font-size: 4em;
+        line-height: 4em;
+        padding-left: 1.5em;
+        outline: none !important;
     }
 
     #login form input[type="text"], #login input[type="password"] {
-        background-color: #3b4148;
-        color: #B5B7BA;
-        margin-bottom: 0.1em;
-        padding: 0 1em 0 0.5em;
-    }
+          background-color: #3b4148;
+          color: #B5B7BA;
+          margin-bottom: 0.1em;
+          padding: 0 1em 0 1em;
+      }
 
     #login form input[type="submit"] {
-        margin-left: 4em;
-        width: 70%;
-        background-color: #ea4c88;
+        margin-left: 1em;
+        width: 80%;
+        background-color: #e4007d;
         color: #e0e0de;
-        font-weight: bold;
         margin-top: 0.2em;
         text-transform: uppercase;
         border: 0 none;

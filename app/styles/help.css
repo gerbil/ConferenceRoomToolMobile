@@ -1,5 +1,5 @@
 .sideMenu.help {
-    background: #009ee2;
+    background: #2ea736;
 }
 
 .sideMenu.help ul li {
@@ -11,9 +11,84 @@
     width: 25em;
     margin: 1em 0 0 1.5em;
     text-align: center;
-    color: #009ee2;
+    color: #2ea736;
 }
 
 .help {
-    color: #fff;
+    font-family: 'Tele2SlabWeb-V2-Regular', sans-serif;
+    color: #FFFFFF;
+    background: #2ea736;
+    height: 100%;
 }
+
+.help span.black {
+    color: #000000;
+}
+
+.help span.red {
+    color: #e1061f;
+}
+
+.helpInfo {
+    margin-top: 1em;
+    font-size: 10em;
+    line-height: 0.9em;
+}
+
+    .helpInfo .helpReport {
+        margin-top: 1em;
+    }
+
+    .helpInfo .helpReport .row {
+        margin-bottom: 0.02em;
+    }
+
+
+    .helpInfo .helpReport .row div {
+        background: #710310;
+        padding: 0.5em;
+        width: 2em;
+        margin-right: 0.02em;
+    }
+
+.helpReport form p {
+        width: 100%;
+    }
+
+    /* icon */
+    .helpReport form span {
+        width: 10%;
+        vertical-align: middle;
+    }
+
+    .helpReport form textarea {
+        width: 85%;
+        display: inline-block;
+        font-size: 50px;
+        padding: 1em 1em 3em 1em;
+        color: #000000;
+        line-height: 1em;
+    }
+
+
+.buttonsHelp {
+    margin: 3.5em 1em 0 0;
+    font-family: 'Tele2SlabWeb-Bold', sans-serif;
+    font-size: 3em;
+    text-align: center;
+}
+
+    .buttonsHelp .send {
+        padding: 1em 0em 1em 0em;
+        background-color: #ffffff;
+        color: #2ea736;
+        margin-right: 1em;
+        width: 12em;
+    }
+
+    .buttonsHelp .back {
+        padding: 1em 0em 1em 0em;
+        background-color: #17541b;
+        color: #fff;
+        width: 12em;
+    }

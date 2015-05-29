@@ -1,17 +1,22 @@
-<div class="sideMenu">
+<div class="sideMenu mainBusy">
     <div class="title">Meeting administration</div>
     <ul>
-        <li ng-click="extend()" ng-show="freeTimeGap >= 30 || !futureEvent">Extend with 30 mins</li>
+        <li ng-click="(freeTimeGap >= 30 || !futureEvent) && changeScreen('extend')" class="mainBusyExtend" ng-class="(freeTimeGap >= 30 || !futureEvent) ? 'active' : 'inactive'">Extend with 30 mins</li>
         <li ng-click="cancelEvent()">End meeting</li>
     </ul>
 
     <div class="title">Equipment</div>
     <ul>
-        <li ng-click="report()">Report broken equipment</li>
+        <li ng-click="changeScreen('report')">Report broken equipment</li>
     </ul>
 
     <div class="title">Support</div>
     <ul>
-        <li ng-click="help()">Helpdesk</li>
+        <li ng-click="changeScreen('help')">Helpdesk</li>
+    </ul>
+
+    <div class="title">Admin</div>
+    <ul>
+        <li ng-click="changeScreen('admin/login')">Login</li>
     </ul>
 </div>

@@ -1,0 +1,25 @@
+<div ng-controller="adminCtrl" class="admin">
+    <div class="loginhead">
+        <div class="hamburger" ng-click="openMenuOther('admin/login')"/>
+    </div>
+    <div id="center-wrapper-admin" >
+        <div id="admin">
+            <p class="logo">Admin entrance</p>
+            <form name="loginForm" novalidate>
+                <fieldset class="clearfix">
+                    <p>
+                        <span class="glyphicon glyphicon-user"></span>
+                        <input type="text" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" name="username" ng-model="username">
+                    </p>
+                    <p>
+                        <span class="glyphicon glyphicon-lock"></span>
+                        <input type="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" name="password" ng-model="password">
+                    </p>
+                    <p>
+                        <input type="submit" value="Sign In" class="button" ng-click="admin(username, password)">
+                    </p>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
