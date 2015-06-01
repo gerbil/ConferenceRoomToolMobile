@@ -35,8 +35,8 @@ angular.module('t2EventsApp')
         // Redirect to a main screen only if apikey is already set
         if (typeof(apikey) !== 'undefined' && apikey !== null) {
             // Redirect to a main screen
-            // $location.path('main'); // path not hash
-            //console.info('Apikey found in localStorage - ' + apikey);
+            $location.path('main'); // path not hash
+            //sconsole.info('Apikey found in localStorage - ' + apikey);
         }
 
         $scope.login = function (username, password) {

@@ -2,7 +2,7 @@
     <div class="loginhead">
         <div class="hamburger" ng-click="openMenuOther('admin/login')"/>
     </div>
-    <div id="center-wrapper-admin" >
+    <div class="center-wrapper-admin">
         <div id="admin">
             <p class="logo">Admin entrance</p>
             <form name="loginForm" novalidate>
@@ -16,6 +16,7 @@
                         <input type="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" name="password" ng-model="password">
                     </p>
                     <p>
+                        <input type="button" value="Bring me back" class="button" ng-click="changeScreen('main')" stop-event>
                         <input type="submit" value="Sign In" class="button" ng-click="admin(username, password)">
                     </p>
                 </fieldset>
