@@ -69,7 +69,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js'],
-        tasks: ['newer:copy:app', 'newer:jshint:all']
+        tasks: ['newer:copy:app'/*, 'newer:jshint:all'*/]
       },
       styles: {
         files: ['<%= yeoman.app %>/<%= yeoman.styles %>/**/*.css'],

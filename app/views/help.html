@@ -14,7 +14,7 @@
                     <fieldset class="clearfix">
                         <p>
                             <span class="glyphicon glyphicon-question-sign"></span>
-                            <textarea type="text" name="request" ng-model="request" autocomplete="off"></textarea>
+                            <textarea type="text" name="request" ng-model="request" autocomplete="off" ng-focus="keyboardUp()" ng-blur="keyboardDown()"></textarea>
                         </p>
                     </fieldset>
                 </form>
